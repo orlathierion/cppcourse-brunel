@@ -5,7 +5,7 @@
 using namespace std ; 
 
 int main () {
-	double time (0.0) ; // faire une variable globale 
+	double time (0.0) ; 
 	double duration ;
 	do{cout << "quelle durée doit avoir la simulation ? ( en ms) " << endl ; 
 		cin>> duration ; } while (duration < 0 ) ;
