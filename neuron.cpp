@@ -8,12 +8,13 @@ using namespace std ;
 Neuron::Neuron () : 
 Ci (1.0) ,
 Ce (1.0) ,
-Potential (20.0) ,
+Potential (-70.0) ,
 tau (20.0) , 
 I (0) ,
 time (0.0),
-R(0.05) ,
-G(30)  { }
+MembraneResistance(0.05) ,
+firingThreshold(20)  {
+	spikes.push_back (-2) ; }
 
 int Neuron::getCe () const {
 	return Ce ; 
@@ -51,22 +52,20 @@ void Neuron::setTime (double t ) {
 	}
 
 void Neuron::RefreshPotential (double h ) {
-	double H ; 
-	H=h-time ; 
-	if (Is_spike() ) {
-		Potential = 20 ; } 
-	else {
-		Potential = exp ( H / tau )*getPotential () + getI()*(R)*(1-exp(-h/tau)) ; 
-	if (getPotential () < 20 ) {
-		Potential = 20 ; }
+	if (isRefractory() ) {Potential = 10.0 ;  }
+	if (not isRefractory ()) {
+		if (Is_spike() ) {
+			Potential = 10 ; } 
+		else {
+			Potential = exp ( -h / tau )*getPotential () + getI()*(MembraneResistance)*(1-exp(-h/tau)) ; }}
 	vector<double> now ;
-	now.push_back (time);
+	now.push_back (time-1);
 	now.push_back (Potential) ;
-	Record.push_back (now) ;};}
+	Record.push_back (now) ;}
 
 	
 bool Neuron::Is_spike (){
-	if (Potential >= G ) {
+	if (Potential >= firingThreshold ) {
 		spikes.push_back(time) ; 
 		return true ;
 		}
@@ -81,3 +80,11 @@ void Neuron::PrintRecord () const {
 	for (int i(0); i<getRecord().size (); ++ i ) {
 		cout << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
+	
+bool Neuron::isRefractory () { 
+	double h ; 
+	h = spikes.back() ;
+	if (time-h < 2.0) {
+		return true ;} 
+	else { 
+		return false ; } }
