@@ -51,16 +51,18 @@ void Neuron::setTime (double t ) {
 	}
 
 void Neuron::RefreshPotential (double h ) {
+	double H ; 
+	H=h-time ; 
 	if (Is_spike() ) {
 		Potential = 20 ; } 
 	else {
-		Potential = exp ( h / tau )*getPotential () + getI()*(R)*(1-exp(-h/tau)) ; }
+		Potential = exp ( H / tau )*getPotential () + getI()*(R)*(1-exp(-h/tau)) ; 
 	if (getPotential () < 20 ) {
 		Potential = 20 ; }
 	vector<double> now ;
 	now.push_back (time);
 	now.push_back (Potential) ;
-	Record.push_back (now) ;};
+	Record.push_back (now) ;};}
 
 	
 bool Neuron::Is_spike (){
