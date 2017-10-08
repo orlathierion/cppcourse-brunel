@@ -18,8 +18,8 @@ class Neuron {
 	double debutI ; 
 	double finI ; 
 	double time ;
-	double R ; 
-	double G ; 
+	double MembraneResistance ; 
+	double firingThreshold ; 
 	vector<vector<double> > Record ;
 	
 	public : 
@@ -37,6 +37,9 @@ class Neuron {
 	bool Is_spike () ;  
 	vector<vector<double> > getRecord () const ; 
 	void PrintRecord () const ; 
+	bool isRefractory () ; 
 	};
 
 #endif 
+
+
