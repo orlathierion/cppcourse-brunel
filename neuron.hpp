@@ -17,10 +17,12 @@ class Neuron {
 	double I ; 
 	double debutI ; 
 	double finI ; 
-	double time ;
-	double R ; 
-	double G ; 
+	int time ;
+	double MembraneResistance ; 
+	double firingThreshold ; 
 	vector<vector<double> > Record ;
+	double j ; //le potentiel envoyer par un spike 
+	vector<Neuron*> connected ; 
 	
 	public : 
 	Neuron () ;  
@@ -29,16 +31,20 @@ class Neuron {
 	int getCe () const ; 
 	double getPotential () const ;
 	double getI () const ;
-	vector<double> getSpikes () const;   
+	vector<double> getSpikes () const; 
+	int getTime () ;   
 	void setI (double Z ) ; 
 	void setIntervalle (double debut, double fin) ;
 	void setTime (double t) ;
+	void addConnection (Neuron* n ) ; 
 	void RefreshPotential (double h) ;
 	bool Is_spike () ;  
 	vector<vector<double> > getRecord () const ; 
 	void PrintRecord () const ; 
+	void PrintSpike () const ;
+	bool isRefractory () ; 
+	double SendSpikes () ; 
+	double ReceiveSpike () ;  
 	};
 
 #endif 
-
-
