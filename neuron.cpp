@@ -80,7 +80,15 @@ void Neuron::PrintRecord () const {
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
 		cout << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
-	
+
+void Neuron::PrintSpike () const {
+	if (spikes.size() > 1) {
+		cout << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
+		for (unsigned int i (1); i<spikes.size() ; ++i) {
+			cout << spikes [i] << " ms " << endl; 
+			}}
+	else {cout << "there was no spike." << endl ; 
+	}}
 bool Neuron::isRefractory () { 
 	double h ; 
 	h = spikes.back() ;
