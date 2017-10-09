@@ -37,6 +37,7 @@ class Neuron {
 	bool Is_spike () ;  
 	vector<vector<double> > getRecord () const ; 
 	void PrintRecord () const ; 
+	void PrintSpike () const ;
 	bool isRefractory () ; 
 	};
 
