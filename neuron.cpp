@@ -12,7 +12,7 @@ Potential (-70.0) ,
 tau (20.0) , 
 I (0) ,
 time (0.0),
-MembraneResistance(0.05) ,
+MembraneResistance(20.0) ,
 firingThreshold(20)  {
 	spikes.push_back (-2) ; }
 
