@@ -30,5 +30,6 @@ int main () {
 		n.RefreshPotential (time) ; 
 		n.setTime (time) ;  }
 	n.PrintRecord () ;
+	n.PrintSpike () ; 
 	return 0 ; }
 
