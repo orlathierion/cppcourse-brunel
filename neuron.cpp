@@ -8,7 +8,7 @@ using namespace std ;
 Neuron::Neuron () : 
 Ci (1.0) ,
 Ce (1.0) ,
-Potential (-70.0) ,
+Potential (0.0) ,
 tau (20.0) , 
 I (1.0) ,
 time (0.0),
