@@ -77,7 +77,7 @@ vector<vector<double> > Neuron::getRecord () const {
 	} 
 	
 void Neuron::PrintRecord () const {
-	for (int i(0); i<getRecord().size (); ++ i ) {
+	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
 		cout << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
 	
