@@ -1,7 +1,9 @@
-include <iostream>
+
+#include <iostream>
 #include <cmath>
 #include "neuron.hpp" 
 #include <string>
+#include <fstream>
 
 using namespace std ; 
 
@@ -10,9 +12,10 @@ void testMembranePot1 () ;
 void testMembranePot2 () ; 
 
 
-int main () {if (TestConnectionDeuxNeurones () ) {cout << "test1 ok " << endl; 
+int main () {ofstream o ("results.txt") ; 
+	if (TestConnectionDeuxNeurones () ) {o << "test1 ok " << endl; 
 		} 
-	else cout << " test 1 fail" << endl ;  
+	else o << " test 1 fail" << endl ;  
 	testMembranePot1 () ;
 	testMembranePot2 () ; 
 return 0 ; }
