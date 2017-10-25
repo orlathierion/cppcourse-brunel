@@ -8,15 +8,12 @@
 
 using namespace std ; 
 
-
 class Neuron {
 	private : 
 	double Potential; 
 	vector<double> spikes ;
 	double tau ; 
-	double I ; /**
-				*I correspond a l'intensité de l'input, on peut choisir le dédut et la fin 
-				**/
+	double I ; 
 	double debutI ; 
 	double finI ; 
 	int time ;
@@ -49,7 +46,7 @@ class Neuron {
 	bool isRefractory () ; 
 	double SendSpikes () ; 
 	double ReceiveSpike () ;  
-	virtual bool IsExcitatory () ;
+	 bool IsExcitatory () ;
 	};
 
 #endif 
