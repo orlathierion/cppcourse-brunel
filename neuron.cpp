@@ -3,7 +3,7 @@
 #include <cmath>
 #include "neuron.hpp" 
 #include <array> 
-#include "results.txt" 
+#include <fstream> 
 
 using namespace std ; 
 
@@ -39,7 +39,9 @@ double Neuron::getI () const {
 	if (debutI <= time and finI >= time ) {
 		return I ; }
 	else {return 0;	} 
-	}
+	}/**
+ * \class <neuron> [<neuron.hpp>] 
+ **/
 	
 int Neuron::getTime () {
 	return time ; }
@@ -112,19 +114,21 @@ vector<vector<double> > Neuron::getRecord () const {
 	} 
 	
 void Neuron::PrintRecord () const {
+	ofstream o ("results.txt") ; 
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
-		cout << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
+		o << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
 
 void Neuron::PrintSpike () const {
-	//ostream& o ("results).txt") ; 
+	ofstream o ("results.txt") ; 
 	if (spikes.size() > 1) {
-		cout << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
+		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
-			cout << spikes [i]- 2 << " ms " << endl; 
+			o << spikes [i]- 2 << " ms " << endl; 
 			}}
-	else {cout << "there was no spike." << endl ; 
+	else {o << "there was no spike." << endl ; 
 	}}
+	
 bool Neuron::isRefractory () { 
 	double h ; 
 	h = spikes.back() ;
