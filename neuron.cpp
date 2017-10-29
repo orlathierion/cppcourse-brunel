@@ -294,6 +294,6 @@ void Neuron::createConnexion () {
  * it returns the number of spikes that has occured 
  **/
 
-double Neuron::getNumberSpike () const {
+int Neuron::getNumberSpike () const {
 	return spikes.size () ; 
 	}
