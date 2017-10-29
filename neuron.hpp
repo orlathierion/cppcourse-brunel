@@ -6,6 +6,11 @@
 #include <vector>
 #include <array>
 
+//comment je fait sans crée de dépendance circulaire
+
+class Excitatory ; 
+class Inhibitory ;
+
 using namespace std ; 
 
 class Neuron {
@@ -25,6 +30,8 @@ class Neuron {
 	vector<Neuron*> connected ; 
 	unsigned int BufferCurseur ; 
 	array<double,4> Buffer ; 
+	int Ce ; 
+	int Ci ; 
 	
 	public : 
 	Neuron () ;  
@@ -37,7 +44,8 @@ class Neuron {
 	void setI (double Z ) ; 
 	void setIntervalle (double debut, double fin) ;
 	void setTime (double t) ;
-	void addConnection (Neuron* n ) ; 
+	void addConnection (Excitatory* n ) ;
+	void addConnection (Inhibitory* n ) ;
 	void RefreshPotential (double h) ;
 	bool Is_spike () ;  
 	vector<vector<double> > getRecord () const ; 
@@ -46,7 +54,11 @@ class Neuron {
 	bool isRefractory () ; 
 	double SendSpikes () ; 
 	double ReceiveSpike () ;  
-	 bool IsExcitatory () ;
+	virtual bool IsExcitatory () ;
+	int getCe () const ; 
+	int getCi () const ; 
+	void createConnexion () ;
+	double getNumberSpike () const ;  
 	};
 
 #endif 
