@@ -58,7 +58,7 @@ class Neuron {
 	int getCe () const ; 
 	int getCi () const ; 
 	void createConnexion () ;
-	double getNumberSpike () const ;  
+	int getNumberSpike () const ;  
 	};
 
 #endif 
