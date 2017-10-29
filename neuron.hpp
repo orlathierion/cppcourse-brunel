@@ -6,8 +6,6 @@
 #include <vector>
 #include <array>
 
-//comment je fait sans crée de dépendance circulaire
-
 class Excitatory ; 
 class Inhibitory ;
 
