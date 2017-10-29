@@ -4,10 +4,18 @@
 #include "neuron.hpp" 
 #include <array> 
 #include <fstream> 
+#include <random>
+#include <vector>
 
 using namespace std ; 
 
 const int bufferDelay (2) ;
+
+/**
+ * \class Neuron 
+ * The class Neuron represent a neuron caracterise by its potential, its resistance, 
+ * the connexion it makes with other neurons. 
+ **/
 
 Neuron::Neuron () : 
 Potential (0.0) ,
@@ -17,14 +25,17 @@ time (0.0),
 MembraneResistance(20.0) ,
 firingThreshold(20),
 j (0.1 ), 
-BufferCurseur (2)  // entraine un delai de 2 	 
+BufferCurseur (2),  // entraine un delai de 2 	 
+Ce (1000) , 
+Ci (250 ) 
 {	spikes.push_back (-2) ; 
 	 for (unsigned int i (0) ; i<Buffer.size() ; ++i ) {
 		 Buffer [i] = 0 ; 
 		 }}
 		 
 /** 
- * getPotential retourne le potentiel de la membrane du neurone 
+ *\fn (getPotential () ) 
+ * getPotential return the curent membrane potential
  **/
 	
 double Neuron::getPotential () const {
@@ -32,53 +43,99 @@ double Neuron::getPotential () const {
 	}	
 	
 /**
- * getI retourne l'intensité du courrant exterieur pendant l'intervalle ou ilest sensé arrivé 
+ * \fn (getI ()) 
+ * getI give us the curent intensity of the external input 
  **/
 	
 double Neuron::getI () const {
 	if (debutI <= time and finI >= time ) {
 		return I ; }
 	else {return 0;	} 
-	}/**
- * \class <neuron> [<neuron.hpp>] 
+	}
+	
+/**
+ * \fn (getTime () ) 
+ * this function give us the time on the cells clock. 
  **/
 	
 int Neuron::getTime () {
 	return time ; }
 	
+/**
+ * \fn (setI (double Z) ) 
+ * this function allow us to change the input coming to the neuron
+ * \param <Z> {intensity of the input}
+ **/
+	
 void Neuron::setI (double Z) {
 	I = Z ; 
 	}
+	
+/**
+ * \fn (getSpikes()) 
+ * this function returns a table with all the time at wich a spike occured 
+ **/
 	
 vector<double> Neuron::getSpikes () const {
 	return spikes ; 
 	}
 	
+/**
+ * \fn (getFiringThreshold () ) 
+ * this function give us access to the firing threshold 
+ **/
+	
 double Neuron::getFiringThreshold () const	{
 	return firingThreshold ; 
 	}
 	
-void Neuron::setIntervalle (double debut , double fin) {
-	debutI = debut ; 
-	finI = fin ; 
+/**
+ * \fn (setIntervalle (double beginning, doube end ) 
+ * this function allows us to set the intervalle during which the external imput occured 
+ * \param <beginning> {the time at wich the imput begin}
+ * \param <end> {the time at wich the imput stops }
+ **/
+	
+void Neuron::setIntervalle (double beginning , double end) {
+	debutI = beginning ; 
+	finI = end ; 
 	}
+	
+/** 
+ * \fn (setTime(double t ) ) 
+ * it allows us to change the inner clock of the cell 
+ * \param <t> {new time}
+ **/
 	
 void Neuron::setTime (double t ) {
 	time = t ; 
 	}
 	
+
 /**
- * addConnection crée une connection entre deux neurone en l'ajoutant au vecteur connected 
+ * \fn (addConnection (Inhibitory* n ) ) 
+ * addConnection create a new connection with a neuron 
+ * \param <n> {it is a pointer on the neuron we want to connect to }
  **/
- 
- // remplacer par une fonction create connection qui fait les connections au hasard avec poisson_gen(vext*ce*h*j) 
 	
-void Neuron::addConnection (Neuron* n) {
-	connected.push_back (n) ; 
-	}
+void Neuron::addConnection (Inhibitory* n) {
+	connected.push_back (n) ; //pb avec le pointeur, il devrait pouvoir s'jouter a mon vecteur de neuron mais ça ne marche pas 
+	} 
 	
 /**
- *  RefreshPotential actualise le potentiel membranaire a chaqque pas de temps 
+ * \fn (addConnection (Excitatory* n ) ) 
+ * addConnection create a new connection with a neuron 
+ * \param <n> {it is a pointer on the neuron we want to connect to }
+ **/
+	
+void Neuron::addConnection (Excitatory* n) {
+	connected.push_back (n) ; 
+	} 
+	
+/**
+ * \fn (RefreshPotential (double h ) ) 
+ *  RefreshPotential refresh the membrane potential at time h. 
+ * \param <h> {time in the local clock}
  **/
 
 void Neuron::RefreshPotential (double h ) {
@@ -96,9 +153,9 @@ void Neuron::RefreshPotential (double h ) {
 	time += 1 ; }
 
 /**
+ * \fn (Is_Spike())
  *  Is_Spike permet de savoir si un spike est crée ou non 
- * @retour 
- * il retourne true si il y a un pic 
+ * \return {it will retrun true if a spike is created}
  **/
 	
 bool Neuron::Is_spike (){
@@ -109,15 +166,31 @@ bool Neuron::Is_spike (){
 	else {return false ; }
 	}
 	
+	/** 
+	 * \fn (getRecord())
+	 * this fonction will give all the membrane potential at each steps
+	 * \return {it will return a table with the time a the corresponding potential membrane}
+	 **/ 
+	
 vector<vector<double> > Neuron::getRecord () const {
 	return Record ; 
 	} 
+	
+/**
+ * \fn (PrintRecord ()) 
+ * this fonction print all the potential for each time steps on the results document
+ **/
 	
 void Neuron::PrintRecord () const {
 	ofstream o ("results.txt") ; 
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
 		o << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
+
+/**
+ * \fn (PrintSpike ()) 
+ * this will fonction will print all the time at wich spikes occured on the results document
+ **/
 
 void Neuron::PrintSpike () const {
 	ofstream o ("results.txt") ; 
@@ -129,6 +202,12 @@ void Neuron::PrintSpike () const {
 	else {o << "there was no spike." << endl ; 
 	}}
 	
+/**
+ * \fn (isRefractory ())
+ * this fonction allows us to know if the neuron is in a refractory period 
+ * \return {it will be true if the membrane is in its refractory periods }
+ **/
+	
 bool Neuron::isRefractory () { 
 	double h ; 
 	h = spikes.back() ;
@@ -137,11 +216,29 @@ bool Neuron::isRefractory () {
 	else { 
 return false ; } }
 
+/**
+ * \fn (SendSpikes ()) 
+ * it allow us to know if the neuron is doing a spike at the curent time 
+ * \return {it will retruns the value of the sended spikes}
+ **/
+
 double Neuron::SendSpikes () {
+	if (this->IsExcitatory()) {
 	if (Is_spike ()){
 	return j ;}
 	else {
-		return 0 ; } }
+		return 0 ; }}
+	if (not this->IsExcitatory ()) {
+		if (Is_spike ()){
+	return -j ;}
+	else {
+		return 0 ; }
+		} }
+		
+/**
+ * \fn (ReceiveSpike () ) 
+ * this fonction will collect all the spikes that the connected neuron have sended 
+ **/ 
 	
 double Neuron::ReceiveSpike () {
 	++BufferCurseur ;
@@ -156,5 +253,47 @@ double Neuron::ReceiveSpike () {
 	if (BufferCurseur >= Buffer.size () ) {
 		BufferCurseur = 0 ; 
 		}
-	return Buffer[BufferCurseur] ; 
+	random_device rd ; 
+	mt19937 gen(rd()) ;
+	poisson_distribution<> d(2) ; 
+	return Buffer[BufferCurseur] + d(gen)  ; 
 	 }
+	 
+/**
+ * \fn (getCe () ) 
+ * getCe allows us to know how many connexion to excitatory neuron our neuron makes
+ **/ 
+ 
+ int Neuron::getCe () const {
+	 return Ce ; 
+	 } 
+	 
+/** 
+ * \fn (getCi ()) 
+ * getCi allows us to know how many connexion to inhibitory neurons our neuron makes 
+ **/ 
+ 
+ int Neuron::getCi () const {
+	 return Ci ; 
+	 }
+	 
+	 
+/** 
+ * \fn (createConnexion () ) 
+ * it creates random connexions to other neuron 
+ **/ 
+
+void Neuron::createConnexion () {
+	for (int i (0) ; i<getCe () ; ++i ) {
+		//trouver comment faire marcher une loi uniforme
+		}
+	}
+
+/**
+ * \fn (getNumberSpikes ()) 
+ * it returns the number of spikes that has occured 
+ **/
+
+double Neuron::getNumberSpike () const {
+	return spikes.size () ; 
+	}
