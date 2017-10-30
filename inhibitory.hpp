@@ -18,3 +18,4 @@ class Inhibitory : public Neuron {
 	
 
 #endif 
+ 
