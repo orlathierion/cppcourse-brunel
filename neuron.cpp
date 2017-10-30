@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cmath>
 #include "neuron.hpp" 
@@ -233,7 +232,8 @@ double Neuron::SendSpikes () {
 	return -j ;}
 	else {
 		return 0 ; }
-		} }
+		} 
+	return 0 ; }
 		
 /**
  * \fn (ReceiveSpike () ) 
@@ -294,6 +294,6 @@ void Neuron::createConnexion () {
  * it returns the number of spikes that has occured 
  **/
 
-int Neuron::getNumberSpike () const {
+double Neuron::getNumberSpike () const {
 	return spikes.size () ; 
 	}
