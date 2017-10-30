@@ -6,6 +6,8 @@
 #include <vector>
 #include <array>
 
+//comment je fait sans crée de dépendance circulaire
+
 class Excitatory ; 
 class Inhibitory ;
 
@@ -56,7 +58,7 @@ class Neuron {
 	int getCe () const ; 
 	int getCi () const ; 
 	void createConnexion () ;
-	int getNumberSpike () const ;  
+	double getNumberSpike () const ;  
 	};
 
 #endif 
