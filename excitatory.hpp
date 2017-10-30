@@ -1,4 +1,4 @@
-#ifndef EXCITATORY
+ifndef EXCITATORY
 #define EXCITATORY 
 
 #include <iostream> 
