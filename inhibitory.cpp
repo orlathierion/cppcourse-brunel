@@ -1,28 +1,25 @@
-#include <iostream> 
-#include "neuron.hpp"
-#include <array>
+#include <iostream>
+#include "inhibitory.hpp" 
+#include <random> 
 
-using namespace std ; 
 
-class Inhibitory : public Neuron {
-	private : 
-	unsigned int IdentificationNumber ; 
-	
-	public : 
-	Inhibitory (unsigned int nb) ; 
-	bool IsExcitatory () override ; 
-	unsigned int GetIdentification () const ; 
-	void createConnexion () ;
-	} ;
-	
+/**
+ * \class Inhibitory
+ * this class inherit of Neuron and correspond to the inhibitory neuron, 
+ * the constructeur take as parameter an integer that corresponds to its identification number
+ **/ 
+ 
+/**
+ * \fn (IsExcitatory() ) 
+ * this fonction allows us to kow if it is excitatory or not 
+ * \return {it returns false  }
+ **/  
+
 bool Inhibitory::IsExcitatory () {
 	return false; }
+	
+Inhibitory::Inhibitory () :
+Neuron ()
+ {}
 
-Inhibitory::Inhibitory (unsigned int nb) :
-Neuron () ,
-IdentificationNumber (nb) {}
-
-unsigned int Inhibitory::GetIdentification () const { 
-	return IdentificationNumber ; }
-
-void Inhibitory::createConnexion () {}
+Inhibitory::~Inhibitory () {} 
