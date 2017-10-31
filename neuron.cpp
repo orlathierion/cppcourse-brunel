@@ -269,18 +269,6 @@ double Neuron::ReceiveSpike () {
  int Neuron::getCi () const {
 	 return Ci ; 
 	 }
-	 
-	 
-/** 
- * \fn (createConnexion () ) 
- * it creates random connexions to other neuron 
- **/ 
-
-void Neuron::createConnexion () {
-	for (int i (0) ; i<getCe () ; ++i ) {
-		//trouver comment faire marcher une loi uniforme
-		}
-	}
 
 /**
  * \fn (getNumberSpikes ()) 
