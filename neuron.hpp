@@ -1,15 +1,12 @@
-#ifndef NEURON
-#define NEURON
+#ifndef NEURON_H
+#define NEURON_H
 
 #include <iostream>
 #include <cmath>
 #include <vector>
 #include <array>
-
-//comment je fait sans crée de dépendance circulaire
-
-class Excitatory ; 
-class Inhibitory ;
+#include <fstream>
+#include <random> 
 
 using namespace std ; 
 
@@ -32,9 +29,10 @@ class Neuron {
 	array<double,4> Buffer ; 
 	int Ce ; 
 	int Ci ; 
+	bool excitatory ; 
 	
 	public : 
-	Neuron () ;  
+	Neuron (bool e) ;  
 	~Neuron () {};  
 	double getPotential () const ;
 	double getI () const ;
@@ -44,8 +42,7 @@ class Neuron {
 	void setI (double Z ) ; 
 	void setIntervalle (double debut, double fin) ;
 	void setTime (double t) ;
-	void addConnection (Excitatory* n ) ;
-	void addConnection (Inhibitory* n ) ;
+	void addConnection (Neuron* n ) ;
 	void RefreshPotential (double h) ;
 	bool Is_spike () ;  
 	vector<vector<double> > getRecord () const ; 
@@ -54,7 +51,7 @@ class Neuron {
 	bool isRefractory () ; 
 	double SendSpikes () ; 
 	double ReceiveSpike () ;  
-	virtual bool IsExcitatory () ;
+	bool IsExcitatory () ;
 	int getCe () const ; 
 	int getCi () const ; 
 	void createConnexion () ;
