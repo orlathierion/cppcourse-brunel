@@ -54,7 +54,6 @@ class Neuron {
 	bool IsExcitatory () ;
 	int getCe () const ; 
 	int getCi () const ; 
-	void createConnexion () ;
 	double getNumberSpike () const ;  
 	};
 
