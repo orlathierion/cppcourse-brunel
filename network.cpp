@@ -1,7 +1,4 @@
 #include "network.hpp"
-#include <iostream> 
-#include <random>
-#include <vector>
 
 /**
  * \class Network 
@@ -13,17 +10,17 @@
  * Ce : the number of excitatory neurons
  **/
  
-Network::Network () : 
-TimeStep (0) , 
+Network::Network () :  
 Ce (10000),
-Ci (2500) 
+Ci (2500),
+TimeStep (0) 
 {
 	for (unsigned int i (0); i<Ce ; ++i ) {
-		Excitatory e(i) ; 
-		netE.push_back (&e) ;}
+		Neuron e(true) ; 
+		netE.push_back(&e) ;}
 	for ( unsigned int i (0); i<Ci ; ++i ) {
-		Inhibitory y(i) ; 
-		netI.push_back (&y) ; 
+		Neuron y (false) ; 
+		netI.push_back(&y) ; 
 		}
 	createConnexion();  }
 		
@@ -36,9 +33,9 @@ void Network::createConnexion () {
 	for (unsigned int i (0); i<Ce ; ++i ){ 
 		for (unsigned int j (0); j<0.1*Ce ; ++j ) {
 			random_device rd ; 
-			mt19937 gen(rd()) ; 
+			mt19937 gen (rd()) ; 
 			uniform_int_distribution<> dis(0, Ce) ; 
-			netE[i]->addConnection(getExcitatory (dis(gen))); }
+			netE[i]->addConnection(getExcitatory(dis(gen))); }
 		for (unsigned int j (0); j<0.1*Ci ; ++j ) {
 			random_device rd ; 
 			mt19937 gen(rd()) ; 
@@ -63,8 +60,8 @@ void Network::createConnexion () {
  * \return {it returns the Ith inhibitory neuron of the network}
  **/
 	
-Inhibitory* Network::getInhibitory (unsigned int i ) {
-	return netI [i] ; 
+Neuron* Network::getInhibitory (unsigned int i ) {
+	return netI[i] ; 
 	}
 
 /**
@@ -73,8 +70,8 @@ Inhibitory* Network::getInhibitory (unsigned int i ) {
  * \return {a pointer on the neuron we want to access to} 
  **/
 
-Excitatory* Network::getExcitatory (unsigned int e) {
-	return netE [e] ;
+Neuron* Network::getExcitatory (unsigned int e) {
+	return netE[e] ;
 	}
 
 /**
@@ -89,5 +86,5 @@ void Network::refreshNetwork (int h) {
 	for (unsigned int j(0); j<Ci; ++j) {
 		netI[j]->RefreshPotential(h) ; 
 		}
-	++time 
-	}
+	++TimeStep;
+}
