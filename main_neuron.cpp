@@ -1,9 +1,6 @@
-
 #include <iostream>
 #include <cmath>
 #include "neuron.hpp" 
-#include "excitatory.hpp" 
-#include "inhibitory.hpp"
 #include <string>
 #include <fstream>
 #include "network.hpp"
@@ -17,14 +14,13 @@ int main () {
 	for ( int global_clock (0) ; global_clock<20 ; ++global_clock) {
 		n.refreshNetwork(global_clock) ; 
 		}
+	produceFigure (&n) ;
 	return 0 ; 
 	} 
 
-//ajouter une fonction produce figure qui cree la figure huit 
-
 void produceFigure (Network* n ) {
 	for (unsigned i(0) ; i<15 ; ++i) {
-		getExcitatory(i)->printSpikes () ; 
-		getInhibitory(i)->printSpikes () ; 
+		n->getExcitatory(i)->PrintSpike () ; 
+		n->getInhibitory(i)->PrintSpike () ; 
 		}
-	}
+}
