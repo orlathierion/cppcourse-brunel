@@ -1,13 +1,11 @@
-#ifndef NETWORK
-#define NETWORK
+#ifndef NETWORK_H
+#define NETWORK_H
 
 #include <iostream>
-#include "inhibitory.hpp"
-#include "excitatory.hpp" 
 #include "neuron.hpp" 
 #include <random> 
 #include <vector>
-
+ 
 using namespace std ; 
 
 /**
@@ -22,8 +20,8 @@ using namespace std ;
 
 class Network {
 	private : 
-	vector <Inhibitory*> netI ; 
-	vector <Excitatory*> netE ; 
+	vector <Neuron*> netI ; 
+	vector <Neuron*> netE ; 
 	unsigned int Ce ; 
 	unsigned int Ci ; 
 	int TimeStep ; 
@@ -31,8 +29,8 @@ class Network {
 	public :
 	Network () ; 
 	void createConnexion () ;
-	Inhibitory* getInhibitory (unsigned int I) ; 
-	Excitatory* getExcitatory (unsigned int E ) ;  
+	Neuron* getInhibitory (unsigned int I) ; 
+	Neuron* getExcitatory (unsigned int E ) ;  
 	void refreshNetwork (int h) ; 
 	 
 	
