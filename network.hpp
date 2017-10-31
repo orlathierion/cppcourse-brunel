@@ -1,5 +1,5 @@
-#ifndef NETWORK_H
-#define NETWORK_H
+#ifndef NETWORK
+#define NETWORK
 
 #include <iostream>
 #include "neuron.hpp" 
@@ -32,9 +32,10 @@ class Network {
 	Neuron* getInhibitory (unsigned int I) ; 
 	Neuron* getExcitatory (unsigned int E ) ;  
 	void refreshNetwork (int h) ; 
+	void produceFigure (); 
 	 
 	
 	};
 
 
-#endif 
+#endif
