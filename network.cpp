@@ -88,3 +88,15 @@ void Network::refreshNetwork (int h) {
 		}
 	++TimeStep;
 }
+
+/**
+ * \fn (produceFigure ()) 
+ * this fonction will print the spiking time of the 30 first neuron on the result sheet to allow us to produce figure 8 
+ **/
+
+void Network::produceFigure () {
+	for (unsigned i(0) ; i<15 ; ++i) {
+		this->getExcitatory(i)->PrintSpike () ; 
+		this->getInhibitory(i)->PrintSpike () ; 
+		}
+	}
