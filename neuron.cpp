@@ -1,10 +1,4 @@
-#include <iostream>
-#include <cmath>
 #include "neuron.hpp" 
-#include <array> 
-#include <fstream> 
-#include <random>
-#include <vector>
 
 using namespace std ; 
 
@@ -16,7 +10,7 @@ const int bufferDelay (2) ;
  * the connexion it makes with other neurons. 
  **/
 
-Neuron::Neuron () : 
+Neuron::Neuron (bool e)  : 
 Potential (0.0) ,
 tau (20.0) , 
 I (1.0) ,
@@ -26,11 +20,12 @@ firingThreshold(20),
 j (0.1 ), 
 BufferCurseur (2),  // entraine un delai de 2 	 
 Ce (1000) , 
-Ci (250 ) 
+Ci (250 ) ,
+excitatory (e)  
 {	spikes.push_back (-2) ; 
 	 for (unsigned int i (0) ; i<Buffer.size() ; ++i ) {
 		 Buffer [i] = 0 ; 
-		 }}
+	} }
 		 
 /** 
  *\fn (getPotential () ) 
@@ -110,24 +105,13 @@ void Neuron::setTime (double t ) {
 	time = t ; 
 	}
 	
-
-/**
- * \fn (addConnection (Inhibitory* n ) ) 
- * addConnection create a new connection with a neuron 
- * \param <n> {it is a pointer on the neuron we want to connect to }
- **/
-	
-void Neuron::addConnection (Inhibitory* n) {
-	connected.push_back (n) ; //pb avec le pointeur, il devrait pouvoir s'jouter a mon vecteur de neuron mais ça ne marche pas 
-	} 
-	
 /**
  * \fn (addConnection (Excitatory* n ) ) 
  * addConnection create a new connection with a neuron 
  * \param <n> {it is a pointer on the neuron we want to connect to }
  **/
 	
-void Neuron::addConnection (Excitatory* n) {
+void Neuron::addConnection (Neuron* n) {
 	connected.push_back (n) ; 
 	} 
 	
@@ -150,6 +134,15 @@ void Neuron::RefreshPotential (double h ) {
 	now.push_back (Potential) ;
 	Record.push_back (now) ;
 	time += 1 ; }
+	
+/**
+ * \fn (isExcitatory())
+ * this fonction will return true if the neuron is excitatory 
+ **/
+ 
+ bool Neuron::IsExcitatory(){
+	 return excitatory ; 
+	 }
 
 /**
  * \fn (Is_Spike())
@@ -192,7 +185,7 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	ofstream o ("results.txt") ; 
+	ofstream o ("results.txt") ; // faire un if o.fail ... 
 	if (spikes.size() > 1) {
 		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
@@ -296,4 +289,4 @@ void Neuron::createConnexion () {
 
 double Neuron::getNumberSpike () const {
 	return spikes.size () ; 
-	}
+}
