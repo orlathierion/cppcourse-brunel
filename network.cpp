@@ -95,8 +95,8 @@ void Network::refreshNetwork (int h) {
  **/
 
 void Network::produceFigure () {
-	for (unsigned i(0) ; i<15 ; ++i) {
-		this->getExcitatory(i)->PrintSpike () ; 
+	for (unsigned int i(0) ; i<15 ; ++i) {
+		this->getExcitatory(i)->PrintSpike () ;
 		this->getInhibitory(i)->PrintSpike () ; 
 		}
-	}
+}
