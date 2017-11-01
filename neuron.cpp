@@ -185,7 +185,7 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	cout << "neuron . cpp 188 caca " << endl ; 
+	cout << "neuron . cpp 188 pb " << endl ; 
 	ofstream o ("results.txt") ; // faire un if o.fail ... 
 	if (o.fail ()) {
 		cout << "neuron.cpp 190 o fails " << endl; 
