@@ -7,11 +7,11 @@
 
 using namespace std ; 
 
-int main (int argc, char* argv[]) {
+int main () {
 	Network n ; 
 	for ( int global_clock (0) ; global_clock<20 ; ++global_clock) {
 		n.refreshNetwork(global_clock) ; 
 		}
 	n.produceFigure() ;
 	return 0 ; 
-	} 
+} 
