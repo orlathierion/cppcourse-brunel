@@ -185,7 +185,13 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
+	cout << "neuron . cpp 188 caca " << endl ; 
 	ofstream o ("results.txt") ; // faire un if o.fail ... 
+	if (o.fail ()) {
+		cout << "neuron.cpp 190 o fails " << endl; 
+		}
+	if (not (o.fail ())) {
+		cout << "neuron.cpp 193 o. open " << endl ; }
 	if (spikes.size() > 1) {
 		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
