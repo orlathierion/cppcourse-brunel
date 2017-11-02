@@ -28,7 +28,6 @@ class Network {
 	
 	public :
 	Network (unsigned int e, unsigned int i) ; 
-	~Network () ; 
 	void createConnexion () ;
 	Neuron* getInhibitory (unsigned int I) ; 
 	Neuron* getExcitatory (unsigned int E ) ;  
