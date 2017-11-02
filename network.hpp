@@ -27,7 +27,7 @@ class Network {
 	int TimeStep ; 
 	
 	public :
-	Network () ; 
+	Network (unsigned int e, unsigned int i) ; 
 	void createConnexion () ;
 	Neuron* getInhibitory (unsigned int I) ; 
 	Neuron* getExcitatory (unsigned int E ) ;  
@@ -39,4 +39,3 @@ class Network {
 
 
 #endif
-
