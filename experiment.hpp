@@ -14,6 +14,7 @@ class Experiment {
 	
 	public :
 	Experiment () ; 
+	~Experiment () ; 
 	void refreshNetwork (int h) ; 
 	void produceFigure (); 
 	};
