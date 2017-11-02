@@ -10,9 +10,9 @@
  * Ce : the number of excitatory neurons
  **/
  
-Network::Network () :  
-Ce (10000),
-Ci (2500),
+Network::Network (unsigned int e, unsigned int i) :  
+Ce (e),
+Ci (i),
 TimeStep (0) 
 {
 	for (unsigned int i (0); i<Ce ; ++i ) {
