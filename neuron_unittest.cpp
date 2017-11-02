@@ -1,6 +1,6 @@
 #include <iostream> 
 #include "neuron.hpp" 
-#include <gtest>
+#include <googletest>
 
 using namespace std ; 
 
@@ -81,3 +81,4 @@ int main () {
 	return RUN_ALL_TESTS () ; 
 	return 0 ; 
 }
+
