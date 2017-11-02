@@ -23,8 +23,6 @@ TimeStep (0)
 		netI.push_back(&y) ; 
 		}
 	createConnexion();  }
-	
-Network::~Network () {}
 		
 /**
  * \fn (createConnexion ()) 
