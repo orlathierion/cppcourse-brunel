@@ -27,8 +27,6 @@ class Neuron {
 	vector<Neuron*> connected ; 
 	unsigned int BufferCurseur ; 
 	array<double,4> Buffer ; 
-	int Ce ; 
-	int Ci ; 
 	bool excitatory ; 
 	
 	public : 
@@ -58,3 +56,4 @@ class Neuron {
 	};
 
 #endif 
+
