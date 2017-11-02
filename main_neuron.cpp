@@ -1,10 +1,15 @@
+#include <iostream>
+#include <cmath>
 #include "neuron.hpp" 
+#include <string>
+#include <fstream>
 #include "network.hpp"
 #include "experiment.hpp" 
+#include "results.txt" 
 
 using namespace std ; 
 
-int main () {
+int main () { 
 	Neuron n (true) ;
 	Network t(2, 1);
 	Experiment e; 
