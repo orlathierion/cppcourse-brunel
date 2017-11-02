@@ -173,7 +173,7 @@ vector<vector<double> > Neuron::getRecord () const {
  **/
 	
 void Neuron::PrintRecord () const {
-	ofstream o ("results.txt") ; 
+	ofstream o ("neuron/results.txt") ;
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
 		o << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
 	}
@@ -184,13 +184,13 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	ofstream o ("results.txt") ;
+	ofstream o ("neuron/results.txt") ;
 	if (spikes.size() > 1) {
-		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
+		cout << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
-			o << spikes [i]- 2 << " ms " << endl; 
+			cout << spikes [i]- 2 << " ms " << endl; 
 			}}
-	else {o << "there was no spike." << endl ; 
+	else {cout << "there was no spike." << endl ; 
 	}}
 	
 /**
