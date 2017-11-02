@@ -15,13 +15,12 @@ Potential (0.0) ,
 tau (20.0) , 
 I (1.0) ,
 time (0.0),
+step (20) ,
 MembraneResistance(20.0) ,
 firingThreshold(20),
 j (0.1 ), 
 BufferCurseur (2),  // entraine un delai de 2 	 
-Ce (1000) , 
-Ci (250 ) ,
-excitatory (e)  
+excitatory (e)
 {	spikes.push_back (-2) ; 
 	 for (unsigned int i (0) ; i<Buffer.size() ; ++i ) {
 		 Buffer [i] = 0 ; 
@@ -185,13 +184,7 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	cout << "neuron . cpp 188 pb " << endl ; 
-	ofstream o ("results.txt") ; // faire un if o.fail ... 
-	if (o.fail ()) {
-		cout << "neuron.cpp 190 o fails " << endl; 
-		}
-	if (not (o.fail ())) {
-		cout << "neuron.cpp 193 o. open " << endl ; }
+	ofstream o ("results.txt") ;
 	if (spikes.size() > 1) {
 		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
@@ -257,24 +250,6 @@ double Neuron::ReceiveSpike () {
 	poisson_distribution<> d(2) ; 
 	return Buffer[BufferCurseur] + d(gen)  ; 
 	 }
-	 
-/**
- * \fn (getCe () ) 
- * getCe allows us to know how many connexion to excitatory neuron our neuron makes
- **/ 
- 
- int Neuron::getCe () const {
-	 return Ce ; 
-	 } 
-	 
-/** 
- * \fn (getCi ()) 
- * getCi allows us to know how many connexion to inhibitory neurons our neuron makes 
- **/ 
- 
- int Neuron::getCi () const {
-	 return Ci ; 
-	 }
 
 /**
  * \fn (getNumberSpikes ()) 
@@ -284,3 +259,4 @@ double Neuron::ReceiveSpike () {
 double Neuron::getNumberSpike () const {
 	return spikes.size () ; 
 }
+
