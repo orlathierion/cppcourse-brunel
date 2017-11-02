@@ -1,6 +1,6 @@
 #include <iostream> 
 #include "neuron.hpp" 
-#include <googletest>
+#include "gtest/gtest.h"
 
 using namespace std ; 
 
@@ -17,10 +17,10 @@ TEST (NeuronTest, PotentialZEROTest) {
 		E.RefreshPotential (j) ; 
 		I.RefreshPotential (j) ; 
 	}
-	EXPECTED_EQ(E.getNumberSpike(), 0) ;
-	EXPECTED_EQ(I.getNumberSpike(), 0) ; 
-	EXTECTED_EQ(E.getPotential(), 0.0 ) ; 
-	EXPECTED_EQ(I.getPotential(), 0.0 ) ;
+	EXPECT_EQ(E.getNumberSpike(), 0) ;
+	EXPECT_EQ(I.getNumberSpike(), 0) ; 
+	EXPECT_EQ(E.getPotential(), 0.0 ) ; 
+	EXPECT_EQ(I.getPotential(), 0.0 ) ;
 }
 
 TEST(NeuronTest, PotentialONETest) {
@@ -36,10 +36,10 @@ TEST(NeuronTest, PotentialONETest) {
 		E.RefreshPotential (j) ; 
 		I.RefreshPotential (j) ; 
 	}
-	EXPECTED_EQ(E.getNumberSpike(), 0) ;
-	EXPECTED_EQ(I.getNumberSpike(), 0) ; 
-	EXTECTED_DOUBLE_EQ(E.getPotential(), 20.0 ) ; 
-	EXPECTED_DOUBLE_EQ(I.getPotential(), 20.0 ) ;
+	EXPECT_EQ(E.getNumberSpike(), 0) ;
+	EXPECT_EQ(I.getNumberSpike(), 0) ; 
+	EXPECT_DOUBLE_EQ(E.getPotential(), 20.0 ) ; 
+	EXPECT_DOUBLE_EQ(I.getPotential(), 20.0 ) ;
 }
 
 TEST(NeuronTest, PotentialTWOTest) {
@@ -55,26 +55,26 @@ TEST(NeuronTest, PotentialTWOTest) {
 		E.RefreshPotential (j) ; 
 		I.RefreshPotential (j) ; 
 	}
-	EXPECTED_GT(E.getNumberSpikes(), 0) ;
-	EXPECTED_GT(I.getNumberSpikes(), 0) ; 
+	EXPECT_GT(E.getNumberSpike(), 0) ;
+	EXPECT_GT(I.getNumberSpike(), 0) ; 
 }
 
 TEST(NeuronTest, SpikeBufferTest) {
-	Neuron E ;
-	Neuron I ; 
-	E->addConnexion (I) ; 
-	I->addConnexion (E) ; 
-	E->setI(1.02) ; 
-	E->setIntervalle (0; 20) ; 
+	Neuron E (true);
+	Neuron I (false); 
+	E.addConnection(&I) ; 
+	I.addConnection(&E) ; 
+	E.setI(1.02) ; 
+	E.setIntervalle (0, 20) ; 
 	int time (0) ; 
 	do {
-		E->refreshPotential () ; 
-		I->refreshPotential () ; 
-		++time 
-	}while (not E->Is_Spike () )
-	I->refreshPotential () ; 
-	I->refreshPotential () ; 
-	EXPECTED_NEAR (I->ReceiveSpike (), 0.1, 1.02) ; 
+		E.RefreshPotential (time) ; 
+		I.RefreshPotential (time) ; 
+		++time ; 
+	}while (not E.Is_spike () ) ;
+	I.RefreshPotential (time) ; 
+	I.RefreshPotential (time) ; 
+	EXPECT_NEAR (I.ReceiveSpike (), 0.1, 1.02) ; 
 }
 
 int main () {
