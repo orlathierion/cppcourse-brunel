@@ -14,8 +14,10 @@ int main () {
 	Network t(2, 1);
 	Experiment e; 
 	for ( int global_clock (0) ; global_clock<20 ; ++global_clock) {
-		e.refreshNetwork(global_clock) ; 
+		cout << "crotte " << endl ; 
+		t.refreshNetwork(global_clock) ; 
 		}
-	e.produceFigure() ;
+	cout << "oups " << endl ; 
+	t.produceFigure() ;
 	return 0 ; 
 } 
