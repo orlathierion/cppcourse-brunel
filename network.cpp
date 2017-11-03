@@ -81,8 +81,9 @@ Neuron* Network::getExcitatory (unsigned int e) {
 
 void Network::refreshNetwork (int h) {
 	for (unsigned int i(0); i<Ce ; ++i) {
-		netE[i]->RefreshPotential(h) ;
+		netE[i]->RefreshPotential(h) ; // segfault ici 
 		}
+	cout << "network.cpp 86 " << endl ;
 	for (unsigned int j(0); j<Ci; ++j) {
 		netI[j]->RefreshPotential(h) ; 
 		}
