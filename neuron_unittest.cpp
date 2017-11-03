@@ -59,7 +59,7 @@ TEST(NeuronTest, PotentialTWOTest) {
 	EXPECT_GT(I.getNumberSpike(), 0) ; 
 }
 
-TEST(NeuronTest, SpikeBufferTest) {
+/*TEST(NeuronTest, SpikeBufferTest) {
 	Neuron E (true);
 	Neuron I (false); 
 	E.addConnection(&I) ; 
@@ -75,10 +75,10 @@ TEST(NeuronTest, SpikeBufferTest) {
 	I.RefreshPotential (time) ; 
 	I.RefreshPotential (time) ; 
 	EXPECT_NEAR (I.ReceiveSpike (), 0.1, 1.02) ; 
-}
+}*/
 
-int main () {
+int main (int argc, char **argv) {
+	::testing::InitGoogleTest(&argc, argv); 
 	return RUN_ALL_TESTS () ; 
-	return 0 ; 
 }
 
