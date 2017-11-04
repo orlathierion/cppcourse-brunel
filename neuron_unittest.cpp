@@ -4,7 +4,7 @@
 
 using namespace std ; 
 
-TEST (NeuronTest, PotentialZEROTest) {
+/*TEST (NeuronTest, PotentialZEROTest) {
 	Neuron E (true) ;
 	Neuron I (false) ; 
 	E.setI(0) ; 
@@ -40,7 +40,7 @@ TEST(NeuronTest, PotentialONETest) {
 	EXPECT_EQ(I.getNumberSpike(), 0) ; 
 	EXPECT_DOUBLE_EQ(E.getPotential(), 20.0 ) ; 
 	EXPECT_DOUBLE_EQ(I.getPotential(), 20.0 ) ;
-}
+}*/
 
 TEST(NeuronTest, PotentialTWOTest) {
 	Neuron E (true);
@@ -59,7 +59,7 @@ TEST(NeuronTest, PotentialTWOTest) {
 	EXPECT_GT(I.getNumberSpike(), 0) ; 
 }
 
-/*TEST(NeuronTest, SpikeBufferTest) {
+TEST(NeuronTest, SpikeBufferTest) {
 	Neuron E (true);
 	Neuron I (false); 
 	E.addConnection(&I) ; 
@@ -71,11 +71,11 @@ TEST(NeuronTest, PotentialTWOTest) {
 		E.RefreshPotential (time) ; 
 		I.RefreshPotential (time) ; 
 		++time ; 
-	}while (not E.Is_spike () ) ;
+	}while ((not E.Is_spike ()) or (time < 20) ) ;
 	I.RefreshPotential (time) ; 
 	I.RefreshPotential (time) ; 
 	EXPECT_NEAR (I.ReceiveSpike (), 0.1, 1.02) ; 
-}*/
+}
 
 int main (int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv); 
