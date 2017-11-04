@@ -24,7 +24,10 @@ excitatory (e)
 {	spikes.push_back (-2) ; 
 	 for (unsigned int i (0) ; i<Buffer.size() ; ++i ) {
 		 Buffer [i] = 0 ; 
-	} }
+	} 
+	vector<vector<double>> v (1); 
+	Record = v ; 
+	}
 		 
 /** 
  *\fn (getPotential () ) 
@@ -121,18 +124,19 @@ void Neuron::addConnection (Neuron* n) {
  **/
 
 void Neuron::RefreshPotential (double h ) {
+	cout << " neuron.cpp refrsh pot 127 " << endl ; 
 	if (isRefractory() ) {Potential = 10.0 ;  }
+	cout << "neuon.cpp refresh 130 " << endl ; 
 	if (not isRefractory ()) {
 		if (Is_spike() ) {
 			Potential = 0 ; } 
-		else {
-			Potential = exp ( -h * step / tau )*getPotential () + getI()*(MembraneResistance)*(1-exp(-h/tau)) ; }
-		Potential += ReceiveSpike () ; }
-	vector<double> now ;
-	now.push_back (time-1);
-	now.push_back (Potential) ;
-	Record.push_back (now) ;
-	time += 1 ; }
+		else {	
+			Potential = exp ( -h * step / tau )*getPotential () + getI()*(MembraneResistance)*(1-exp(-h/tau)) ;
+		Potential += ReceiveSpike () ; }}
+	cout << "neuron.cpp refresh 136 " << endl ; 
+	updateRecord () ; 
+	time += 1 ; 
+	cout << "refresh pot neuron,cpp 136 " << endl ;  }
 	
 /**
  * \fn (isExcitatory())
@@ -173,9 +177,13 @@ vector<vector<double> > Neuron::getRecord () const {
  **/
 	
 void Neuron::PrintRecord () const {
-	ofstream o ("neuron/results.txt") ;
+	ofstream o ("results.txt") ;
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
-		o << getRecord()[i] [0]<< "  -> " << getRecord()[i][1] << endl ; }
+		cout << " neuron.cpp 181 for du print " << endl ;
+		o << getRecord()[0][i] ;
+		o << "  -> " ;
+		o << getRecord()[1][i]; 
+		o << endl ; }
 	}
 
 /**
@@ -202,6 +210,7 @@ void Neuron::PrintSpike () const {
 bool Neuron::isRefractory () { 
 	double h ; 
 	h = spikes.back() ;
+	cout << "neuron.cpp is refrqctorz 214 " << endl ; 
 	if (time-h < 2.0) {
 		return true ;} 
 	else { 
@@ -260,3 +269,6 @@ double Neuron::getNumberSpike () const {
 	return spikes.size () ; 
 }
 
+void Neuron::updateRecord () {
+	Record.push_back({time-1, getPotential()}) ;
+	}
