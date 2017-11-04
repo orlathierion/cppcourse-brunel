@@ -15,7 +15,7 @@ Ce (e),
 Ci (i),
 TimeStep (0) 
 {
-	for (unsigned int i (0); i<Ce ; ++i ) {
+	for (unsigned int i (0); i<Ce ; ++i ) { 
 		Neuron e(true) ; 
 		netE.push_back(&e) ;}
 	for ( unsigned int i (0); i<Ci ; ++i ) {
@@ -71,6 +71,7 @@ Neuron* Network::getInhibitory (unsigned int i ) {
  **/
 
 Neuron* Network::getExcitatory (unsigned int e) {
+	cout << "network.cpp 74 " << endl ;
 	return netE[e] ;
 	}
 
@@ -81,9 +82,9 @@ Neuron* Network::getExcitatory (unsigned int e) {
 
 void Network::refreshNetwork (int h) {
 	for (unsigned int i(0); i<Ce ; ++i) {
-		netE[i]->RefreshPotential(h) ; // segfault ici 
-		}
-	cout << "network.cpp 86 " << endl ;
+		cout <<  "network.cpp 86 refresh network " << endl ;
+		getExcitatory(i)->RefreshPotential(h) ;
+		  }
 	for (unsigned int j(0); j<Ci; ++j) {
 		netI[j]->RefreshPotential(h) ; 
 		}
