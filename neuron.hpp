@@ -53,6 +53,7 @@ class Neuron {
 	int getCe () const ; 
 	int getCi () const ; 
 	double getNumberSpike () const ;  
+	void updateRecord () ; 
 	};
 
 #endif 
