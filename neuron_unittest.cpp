@@ -74,7 +74,7 @@ TEST(NeuronTest, SpikeBufferTest) {
 	}while ((not E.Is_spike ()) or (time < 20) ) ;
 	I.RefreshPotential (time) ; 
 	I.RefreshPotential (time) ; 
-	EXPECT_NEAR (I.ReceiveSpike (), 0.1, 1.02) ; 
+	EXPECT_GT (I.ReceiveSpike (), 0) ; 
 }
 
 int main (int argc, char **argv) {
