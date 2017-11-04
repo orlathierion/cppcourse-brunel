@@ -11,13 +11,8 @@ using namespace std ;
 
 int main () { 
 	Neuron n (true) ;
-	Network t(2, 1);
-	Experiment e; 
-	for ( int global_clock (0) ; global_clock<20 ; ++global_clock) {
-		cout << "crotte " << endl ; 
-		t.refreshNetwork(global_clock) ; 
-		}
-	cout << "oups " << endl ; 
-	t.produceFigure() ;
+	Network t(3, 2); 
+	//Experiment e; 
+	t.refreshNetwork (1) ;  
 	return 0 ; 
 } 
