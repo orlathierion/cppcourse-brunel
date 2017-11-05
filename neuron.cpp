@@ -57,6 +57,14 @@ double Neuron::getI () const {
 int Neuron::getTime () {
 	return time ; }
 	
+double Neuron::getTau () const{
+	return tau ; 
+	}
+
+double Neuron::getMembraneRestistance () const {
+	return MembraneResistance ; 
+	}
+	
 /**
  * \fn (setI (double Z) ) 
  * this function allow us to change the input coming to the neuron
@@ -107,6 +115,10 @@ void Neuron::setTime (double t ) {
 	time = t ; 
 	}
 	
+void Neuron::setPotential (double t) {
+	Potential = t ; 
+	} 
+	
 /**
  * \fn (addConnection (Excitatory* n ) ) 
  * addConnection create a new connection with a neuron 
@@ -124,15 +136,19 @@ void Neuron::addConnection (Neuron* n) {
  **/
 
 void Neuron::RefreshPotential (double h ) {
+	cout << " neuron.cpp refrsh pot 127 " << endl ; 
 	if (isRefractory() ) {Potential = 10.0 ;  }
+	cout << "neuon.cpp refresh 130 " << endl ; 
 	if (not isRefractory ()) {
 		if (Is_spike() ) {
 			Potential = 0 ; } 
 		else {	
 			Potential = exp ( -h * step / tau )*getPotential () + getI()*(MembraneResistance)*(1-exp(-h/tau)) ;
 		Potential += ReceiveSpike () ; }}
+	cout << "neuron.cpp refresh 136 " << endl ; 
 	updateRecord () ; 
-	time += 1 ;   }
+	time += 1 ; 
+	cout << "refresh pot neuron,cpp 136 " << endl ;  }
 	
 /**
  * \fn (isExcitatory())
@@ -175,6 +191,7 @@ vector<vector<double> > Neuron::getRecord () const {
 void Neuron::PrintRecord () const {
 	ofstream o ("results.txt") ;
 	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
+		cout << " neuron.cpp 181 for du print " << endl ;
 		o << getRecord()[0][i] ;
 		o << "  -> " ;
 		o << getRecord()[1][i]; 
