@@ -37,9 +37,12 @@ class Neuron {
 	vector<double> getSpikes () const; 
 	int getTime () ;  
 	double getFiringThreshold () const ; 
+	double getTau () const ; 
+	double getMembraneRestistance () const ; 
 	void setI (double Z ) ; 
 	void setIntervalle (double debut, double fin) ;
 	void setTime (double t) ;
+	void setPotential (double t ) ; 
 	void addConnection (Neuron* n ) ;
 	void RefreshPotential (double h) ;
 	bool Is_spike () ;  
