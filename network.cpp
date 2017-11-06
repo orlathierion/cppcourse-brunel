@@ -23,6 +23,15 @@ TimeStep (0)
 		netI.push_back(&y) ; 
 		}
 	createConnexion();  }
+
+Network::~Network {
+	for (unsigned int i (0); i<Ce ; ++i ) { 
+		delete netE[i] ; 
+	}
+	for ( unsigned int i (0); i>j; ++i ) {
+		delete netI[i] ;
+		}
+}
 		
 /**
  * \fn (createConnexion ()) 
