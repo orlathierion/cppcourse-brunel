@@ -11,11 +11,12 @@ using namespace std ;
 
 int main () { 
 	//Neuron n (true) ;
-	Network t(3, 2); 
+	Network t(10000, 2500); 
 	Experiment e; 
-	t.refreshNetwork (1) ; 
-	t.refreshNetwork (2) ;  
-	//t.produceFigure () ; 
-	t.getExcitatory(1)->PrintRecord () ; 
+	for (int i(0); i< 20 ; ++i ) {
+		t.refreshNetwork (i) ; }
+	t.produceFigure () ; 
+	//t.getExcitatory(1)->PrintRecord () ; 
+	cout << "on a fini le pg éain cpp 20 " << endl ; 
 	return 0 ; 
 } 
