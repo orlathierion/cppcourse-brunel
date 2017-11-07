@@ -24,7 +24,11 @@ class Network {
 	vector <Neuron*> netE ; 
 	unsigned int Ce ; 
 	unsigned int Ci ; 
-	int TimeStep ; 
+	int TimeStep ;
+	random_device rd ; 
+	mt19937 gen (rd()) ; 
+	uniform_int_distribution<> disE(0, Ce) ; 
+	uniform_int_distribution<> disI(0, Ci) ; 
 	
 	public :
 	Network (unsigned int e, unsigned int i) ; 
