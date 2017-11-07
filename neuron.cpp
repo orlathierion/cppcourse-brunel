@@ -136,19 +136,19 @@ void Neuron::addConnection (Neuron* n) {
  **/
 
 void Neuron::RefreshPotential (double h ) {
-	cout << " neuron.cpp refrsh pot 127 " << endl ; 
 	if (isRefractory() ) {Potential = 10.0 ;  }
-	cout << "neuon.cpp refresh 130 " << endl ; 
 	if (not isRefractory ()) {
 		if (Is_spike() ) {
 			Potential = 0 ; } 
 		else {	
+			random_device rd ; 
+			mt19937 gen(rd()) ;
+			poisson_distribution<> d(2) ; 
 			Potential = exp ( -h * step / tau )*getPotential () + getI()*(MembraneResistance)*(1-exp(-h/tau)) ;
-		Potential += ReceiveSpike () ; }}
-	cout << "neuron.cpp refresh 136 " << endl ; 
+		Potential += ReceiveSpike () ;
+		Potential += d(gen) ;  }}
 	updateRecord () ; 
-	time += 1 ; 
-	cout << "refresh pot neuron,cpp 136 " << endl ;  }
+	time += 1 ;   }
 	
 /**
  * \fn (isExcitatory())
@@ -190,11 +190,12 @@ vector<vector<double> > Neuron::getRecord () const {
 	
 void Neuron::PrintRecord () const {
 	ofstream o ("results.txt") ;
-	for (unsigned int i(0); i<getRecord().size (); ++ i ) {
-		cout << " neuron.cpp 181 for du print " << endl ;
-		o << getRecord()[0][i] ;
+	vector<vector<double> > v ; 
+	v = getRecord () ; 
+	for (unsigned int i(1); i<getRecord().size () ; ++ i ) {
+		o << v[i][0] ;
 		o << "  -> " ;
-		o << getRecord()[1][i]; 
+		o << v[i][1]; 
 		o << endl ; }
 	}
 
@@ -204,14 +205,21 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	ofstream o ("neuron/results.txt") ;
+	cout << " print spikes neuron cpp 206 " << endl ; 
+	ofstream o ("results.txt", ios::out) ;
+	if (o.fail ()) {cout << "o.fail neuron cpp 207 " << endl ; }
+	if (not o.fail ()) {cout << "o est ouvert neuron cpp 210 " << endl ; }
 	if (spikes.size() > 1) {
-		cout << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
+		cout << " if de print spikes neuron cpp 209 " << endl ; 
+		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
-			cout << spikes [i]- 2 << " ms " << endl; 
+			o << spikes [i]- 2 << " ms " << endl; 
 			}}
-	else {cout << "there was no spike." << endl ; 
-	}}
+	else {
+		cout << "else de print spike neuron cpp 215 " << endl ; 
+		o << "there was no spike." << endl ; 
+	}
+	o.close () ; }
 	
 /**
  * \fn (isRefractory ())
@@ -222,7 +230,6 @@ void Neuron::PrintSpike () const {
 bool Neuron::isRefractory () { 
 	double h ; 
 	h = spikes.back() ;
-	cout << "neuron.cpp is refrqctorz 214 " << endl ; 
 	if (time-h < 2.0) {
 		return true ;} 
 	else { 
@@ -235,18 +242,17 @@ return false ; } }
  **/
 
 double Neuron::SendSpikes () {
-	if (this->IsExcitatory()) {
+	 int r ; 
+	if (excitatory) { 
 	if (Is_spike ()){
-	return j ;}
+	r = j ;}
 	else {
-		return 0 ; }}
-	if (not this->IsExcitatory ()) {
+		r = 0 ; }} 
 		if (Is_spike ()){
-	return -j ;}
+	r = -j ;}
 	else {
-		return 0 ; }
-		} 
-	return 0 ; }
+		r = 0  ; }
+	return r ; }
 		
 /**
  * \fn (ReceiveSpike () ) 
@@ -256,8 +262,8 @@ double Neuron::SendSpikes () {
 double Neuron::ReceiveSpike () {
 	++BufferCurseur ;
 	double SumSpikes (0.0); 
-	for (unsigned int i (0) ; i<connected.size () ; ++i ) { 
-		SumSpikes += connected[i]->SendSpikes () ; 
+	for (unsigned int i (0) ; i<1; ++i ) { 
+		SumSpikes += getConnected(i)->SendSpikes() ; 
 		if (BufferCurseur + bufferDelay < Buffer.size() ) {
 			Buffer [BufferCurseur+bufferDelay]= SumSpikes ; }
 		if (BufferCurseur + bufferDelay >= Buffer.size ()) {
@@ -266,10 +272,7 @@ double Neuron::ReceiveSpike () {
 	if (BufferCurseur >= Buffer.size () ) {
 		BufferCurseur = 0 ; 
 		}
-	random_device rd ; 
-	mt19937 gen(rd()) ;
-	poisson_distribution<> d(2) ; 
-	return Buffer[BufferCurseur] + d(gen)  ; 
+	return Buffer[BufferCurseur] ; 
 	 }
 
 /**
@@ -283,4 +286,8 @@ double Neuron::getNumberSpike () const {
 
 void Neuron::updateRecord () {
 	Record.push_back({time-1, getPotential()}) ;
+	}
+
+Neuron* Neuron::getConnected (int i) { 
+	return connected[i] ; 
 	}
