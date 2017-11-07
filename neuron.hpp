@@ -57,6 +57,7 @@ class Neuron {
 	int getCi () const ; 
 	double getNumberSpike () const ;  
 	void updateRecord () ; 
+	Neuron* getConnected (int i ) ; 
 	};
 
 #endif 
