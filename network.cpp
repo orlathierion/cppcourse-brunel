@@ -16,22 +16,22 @@ Ci (i),
 TimeStep (0) 
 {
 	for (unsigned int i (0); i<Ce ; ++i ) { 
-		Neuron e(true) ; 
-		netE.push_back(&e) ;}
+		Neuron* e(new Neuron(true)) ; 
+		netE.push_back(e) ;}
 	for ( unsigned int i (0); i<Ci ; ++i ) {
-		Neuron y (false) ; 
-		netI.push_back(&y) ; 
+		Neuron* y (new Neuron(false)) ; 
+		netI.push_back(y) ; 
 		}
 	createConnexion();  }
-
-Network::~Network {
+	
+Network::~Network () {
 	for (unsigned int i (0); i<Ce ; ++i ) { 
 		delete netE[i] ; 
-	}
-	for ( unsigned int i (0); i>j; ++i ) {
-		delete netI[i] ;
 		}
-}
+	for ( unsigned int i (0); i<Ci ; ++i ) {
+		delete netI[i] ; 
+		}
+	}
 		
 /**
  * \fn (createConnexion ()) 
@@ -39,28 +39,20 @@ Network::~Network {
  **/
 
 void Network::createConnexion () {
+	random_device rd ; 
+	mt19937 gen (rd()) ; 
+	uniform_int_distribution<> disE(0, Ce) ; 
+	uniform_int_distribution<> disI(0, Ci) ; 
 	for (unsigned int i (0); i<Ce ; ++i ){ 
 		for (unsigned int j (0); j<0.1*Ce ; ++j ) {
-			random_device rd ; 
-			mt19937 gen (rd()) ; 
-			uniform_int_distribution<> dis(0, Ce) ; 
-			netE[i]->addConnection(getExcitatory(dis(gen))); }
+			netE[i]->addConnection(getExcitatory(disE(gen))); }
 		for (unsigned int j (0); j<0.1*Ci ; ++j ) {
-			random_device rd ; 
-			mt19937 gen(rd()) ; 
-			uniform_int_distribution<> dis(0, Ci) ; 
-			netE[i]->addConnection(getInhibitory(dis(gen))); }}
+			netE[i]->addConnection(getInhibitory(disE(gen))); }}
 	for (unsigned int i (0); i<Ci ; ++i ){
 		for (unsigned int j (0); j<0.1*Ce ; ++j ) {
-			random_device rd ; 
-			mt19937 gen(rd()) ; 
-			uniform_int_distribution<> dis(0, Ce) ; 
-			netI[i]->addConnection(getExcitatory(dis(gen))); }
+			netI[i]->addConnection(getExcitatory(disI(gen))); }
 		for (unsigned int j (0); j<0.1*Ci ; ++j ) {
-			random_device rd ; 
-			mt19937 gen(rd()) ; 
-			uniform_int_distribution<> dis(0, Ci) ;
-			netI[i]->addConnection(getInhibitory(dis(gen))); }}
+			netI[i]->addConnection(getInhibitory(disI(gen))); }}
 	}
 	
 /**
@@ -90,11 +82,9 @@ Neuron* Network::getExcitatory (unsigned int e) {
 
 void Network::refreshNetwork (int h) {
 	for (unsigned int i(0); i<Ce ; ++i) {
-		cout <<  "network.cpp 86 refresh network " << endl ;
 		getExcitatory(i)->RefreshPotential(h) ;
-		cout << "netyork cpp 88 " << endl ;
 		  }
-	for (unsigned int j(0); j<Ci; ++j) {
+	for (unsigned int j(0); j<Ci ; ++j) {
 		netI[j]->RefreshPotential(h) ; 
 		}
 	++TimeStep;
@@ -106,7 +96,7 @@ void Network::refreshNetwork (int h) {
  **/
 
 void Network::produceFigure () {
-	for (unsigned int i(0) ; i<15 ; ++i) {
+	for (unsigned int i(0) ; i<1 ; ++i) {
 		this->getExcitatory(i)->PrintSpike () ;
 		this->getInhibitory(i)->PrintSpike () ; 
 		}
