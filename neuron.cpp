@@ -190,13 +190,15 @@ vector<vector<double> > Neuron::getRecord () const {
 	
 void Neuron::PrintRecord () const {
 	ofstream o ("results.txt") ;
+	//if (o.fail () ) {cout << " caca neuron print spike " << endl ; }
+	//if (not o.fail ()) { cout << " cq s4ouvre "<< endl ; }
 	vector<vector<double> > v ; 
 	v = getRecord () ; 
 	for (unsigned int i(1); i<getRecord().size () ; ++ i ) {
-		o << v[i][0] ;
-		o << "  -> " ;
-		o << v[i][1]; 
-		o << endl ; }
+		cout << v[i][0] +1 ;
+		cout << "  -> " ;
+		cout << v[i][1]; 
+		cout << endl ; }
 	}
 
 /**
@@ -205,19 +207,19 @@ void Neuron::PrintRecord () const {
  **/
 
 void Neuron::PrintSpike () const {
-	cout << " print spikes neuron cpp 206 " << endl ; 
+	//cout << " print spikes neuron cpp 206 " << endl ; 
 	ofstream o ("results.txt", ios::out) ;
-	if (o.fail ()) {cout << "o.fail neuron cpp 207 " << endl ; }
-	if (not o.fail ()) {cout << "o est ouvert neuron cpp 210 " << endl ; }
+	//if (o.fail ()) {cout << "o.fail neuron cpp 207 " << endl ; }
+	//if (not o.fail ()) {cout << "o est ouvert neuron cpp 210 " << endl ; }
 	if (spikes.size() > 1) {
-		cout << " if de print spikes neuron cpp 209 " << endl ; 
-		o << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
+		//cout << " if de print spikes neuron cpp 209 " << endl ; 
+		cout << "we observe "<< spikes.size () - 1 << " spikes at : " << endl ; 
 		for (unsigned int i (1); i<spikes.size() ; ++i) {
-			o << spikes [i]- 2 << " ms " << endl; 
+			cout << spikes [i]- 2 << " ms " << endl; 
 			}}
 	else {
-		cout << "else de print spike neuron cpp 215 " << endl ; 
-		o << "there was no spike." << endl ; 
+		//cout << "else de print spike neuron cpp 215 " << endl ; 
+		cout << "there was no spike." << endl ; 
 	}
 	o.close () ; }
 	
@@ -262,7 +264,7 @@ double Neuron::SendSpikes () {
 double Neuron::ReceiveSpike () {
 	++BufferCurseur ;
 	double SumSpikes (0.0); 
-	for (unsigned int i (0) ; i<1; ++i ) { 
+	for (unsigned int i (1) ; i<spikes.size (); ++i ) { 
 		SumSpikes += getConnected(i)->SendSpikes() ; 
 		if (BufferCurseur + bufferDelay < Buffer.size() ) {
 			Buffer [BufferCurseur+bufferDelay]= SumSpikes ; }
