@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cmath>
 #include "neuron.hpp" 
@@ -11,11 +10,12 @@
 using namespace std ; 
 
 int main () { 
-	Neuron n (true) ;
-	//Network t(3, 2); 
+	//Neuron n (true) ;
+	Network t(3, 2); 
 	Experiment e; 
-	n.RefreshPotential (1) ; 
-	n.PrintRecord () ;
-	//t.refreshNetwork (1) ;  
+	t.refreshNetwork (1) ; 
+	t.refreshNetwork (2) ;  
+	//t.produceFigure () ; 
+	t.getExcitatory(1)->PrintRecord () ; 
 	return 0 ; 
 } 
