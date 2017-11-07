@@ -22,9 +22,7 @@ TimeStep (0)
 		Neuron* y (new Neuron(false)) ; 
 		netI.push_back(y) ; 
 		}
-	createConnexion(); 
-
-}
+	createConnexion();  }
 	
 Network::~Network () {
 	for (unsigned int i (0); i<Ce ; ++i ) { 
@@ -41,6 +39,10 @@ Network::~Network () {
  **/
 
 void Network::createConnexion () {
+	random_device rd ; 
+	mt19937 gen (rd()) ; 
+	uniform_int_distribution<> disE(0, Ce) ; 
+	uniform_int_distribution<> disI(0, Ci) ; 
 	for (unsigned int i (0); i<Ce ; ++i ){ 
 		for (unsigned int j (0); j<0.1*Ce ; ++j ) {
 			netE[i]->addConnection(getExcitatory(disE(gen))); }
@@ -94,7 +96,8 @@ void Network::refreshNetwork (int h) {
  **/
 
 void Network::produceFigure () {
-	for (unsigned int i(0) ; i<1 ; ++i) {
+	for (unsigned int i(0) ; i<20 ; ++i) {
+		cout << "          " << i << endl ; 
 		this->getExcitatory(i)->PrintSpike () ;
 		this->getInhibitory(i)->PrintSpike () ; 
 		}
