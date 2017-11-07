@@ -34,7 +34,7 @@ class Network {
 	Neuron* getExcitatory (unsigned int E ) ;  
 	void refreshNetwork (int h) ; 
 	void produceFigure (); 
-	 
+
 	
 	};
 
