@@ -10,19 +10,22 @@
  * Ce : the number of excitatory neurons
  **/
  
-Network::Network (unsigned int e, unsigned int i) :  
+Network::Network (unsigned int e, unsigned int i, double weight, double ratio) :  
 Ce (e),
 Ci (i),
-TimeStep (0) 
-{
+TimeStep (0) ,
+Vthr(0.01)
+{	
 	for (unsigned int i (0); i<=Ce ; ++i ) { 
-		Neuron* e(new Neuron(true)) ; 
+		Neuron* e(new Neuron(true, Vthr*ratio, weight, 1000)) ; 
 		netE.push_back(e) ;}
 	for ( unsigned int i (0); i<=Ci ; ++i ) {
-		Neuron* y (new Neuron(false)) ; 
+		Neuron* y(new Neuron(false, Vthr*ratio, weight, 1000)) ; 
 		netI.push_back(y) ; 
 		}
-	createConnexion();  }
+		cout << "all neuron are created netyorp cpp 26 " << endl ; 
+	createConnexion(); 
+	cout << "all neurons are connected network cpp 28 " << endl ;  }
 	
 Network::~Network () {
 	for (unsigned int i (0); i<Ce ; ++i ) { 
@@ -77,13 +80,13 @@ void Network::refreshNetwork (int h) {
 }
 
 void Network::produceFigure () {
-	ofstream o ("results.txt", ios::out ) ;
-	for (unsigned int i(0) ; i<Ce*0.1 ; ++i) {
-		o<< " neuron excitateur numero " << i << endl ;  
-		this->getExcitatory(i)->PrintRecord () ; }
-	for (unsigned int i(0) ; i<Ci*0.1 ; ++i) {
-		o<< " neuron inhibiteur numero " << i << endl ;
-		this->getInhibitory(i)->PrintRecord () ; 
+	ofstream o ("Spikes.gdb", ios::out ) ;
+	for (unsigned int i(0) ; i< 3; ++i) {
+		o<< "numero : " << 1 << "  "  ; 
+		this->getExcitatory(1)->PrintSpike () ;}
+	for (unsigned int i(0) ; i<3 ; ++i) {
+		o<< "numero : " << i+Ce*0.1 << "  "  ;
+		this->getInhibitory(i)->PrintSpike () ; 
 		}
 	getInhibitory(1)->PrintRecord () ;
 	o.close () ; 
