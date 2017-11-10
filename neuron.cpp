@@ -227,5 +227,5 @@ void Neuron::updateRecord () {
 Neuron* Neuron::getConnected (int i) { 
 	return connected[i] ; }
 	
-int Neuron::getNumberConnection () {
+int Neuron::getNumberConnection () const {
 	return connected.size () ; }
