@@ -1,4 +1,5 @@
-#include <iostream> 
+
+#include <iostream>
 #include "neuron.hpp" 
 #include "gtest/gtest.h"
 
@@ -40,9 +41,9 @@ TEST(NeuronTest, PotentialONETest) {
 	EXPECT_EQ(I.getNumberSpike(), 1) ; 
 	EXPECT_DOUBLE_EQ(E.getPotential(), 20.0 ) ; 
 	EXPECT_DOUBLE_EQ(I.getPotential(), 20.0 ) ;
-}
+}*/
 
-TEST(NeuronTest, PotentialTWOTest) {
+TEST(NeuronTest, SpikingTest) {
 	Neuron E (true); 
 	Neuron I (false);  
 	E.setI(1.01) ; 
@@ -55,14 +56,20 @@ TEST(NeuronTest, PotentialTWOTest) {
 		E.RefreshPotential (j) ; 
 		I.RefreshPotential (j) ; 
 	}
-	cout << " for neuron e " << E.getNumberSpike () << endl ; 
 	EXPECT_GT(E.getNumberSpike(), 1) ;
 	EXPECT_GT(I.getNumberSpike(), 1) ; 
-}*/
+}
 
-TEST(NeuronTest, SpikeBufferTestandConnection) {
-	Neuron E (true);
-	Neuron I (false); 
+TEST (NeuronTest, ConnectionTest) {
+	Neuron e (true, 1, 1, 1) ; 
+	Neuron f (true, 1, 1, 1) ; 
+	e.addConnection(&f) ; 
+	EXPECT_EQ (e.getNumberConnection (), 1) ; 
+	}
+
+TEST(NeuronTest, SpikeBufferTest) {
+	Neuron E (true, 1, 1, 1);
+	Neuron I (false,1,1,1); 
 	E.addConnection(&I) ; 
 	I.addConnection(&E) ; 
 	E.setI(4.5) ; 
@@ -76,9 +83,39 @@ TEST(NeuronTest, SpikeBufferTestandConnection) {
 	q = E.SendSpikes (time) ;
  	I.RefreshPotential (time) ; 
 	I.RefreshPotential (time) ; 
-	EXPECT_NEAR (I.ReceiveSpike (time),q , 0.5) ; 
+	EXPECT_NEAR (I.ReceiveSpike (time), q, 0.5) ; 
 }
 
+TEST(NeuronTest, sendSpikeTest) {
+	Neuron n (true, 1, 1, 1); 
+	n.setI (1.2) ; 
+	n.setIntervalle (0, 100) ; 
+	int time (0) ; 
+	do {
+		++time ; 
+		n.RefreshPotential (time); 
+		}while (not(E.Is_spike(time)) ; 
+	EXPECT_NEAR (n.SendSpikes (time), 0.1, 0.01) ; 
+	}
+	
+TEST(NeuronTest, ReceiveSpikeTest){
+	Neuron n(true, 1, 1, 1); 
+	Neuron i (false, 1,1,1)  ;
+	i.addConnection (&n) ; 
+	n.steI(1.2) ; 
+	n.setIntervalle (0, 100) ; 
+	int time (0) ; 
+	do {
+		++time ; 
+		n.RefreshPotential (time); 
+		i.RefreshPotential (time)
+		}while (not(E.Is_spike(time)) ; 
+	++time ;
+	i.RefreshPotential (time ) ; 
+	++ time ; 
+	i.RefreshPotential (time) ; 
+	EXPECT_NEAR (i.ReceiveSpike (time), e.SendSpikes (time - 2), 0.1) ; 
+	}
 
 
 int main (int argc, char **argv) {
