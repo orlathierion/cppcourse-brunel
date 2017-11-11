@@ -9,8 +9,8 @@ add_subdirectory(googletest)
 include_directories(${gtest_SOURCE_DIR}/include${gtest_SOURCE_DIR})
 
 set (CMAKE_CXX_FLAGS "-O3 -W -Wall -pedantic -std=c++11") 
-add_executable (neuron neuron.cpp main_neuron.cpp network.cpp experiments.cpp) 
-add_executable (neuron_unittest neuron.cpp network.cpp neuron_unittest.cpp experiments.cpp)
+add_executable (neuron neuron.cpp main_neuron.cpp network.cpp) 
+add_executable (neuron_unittest neuron.cpp network.cpp neuron_unittest.cpp)
 
 
  target_link_libraries(neuron_unittest ${GTEST_BOTH_LIBRARIES} pthread)
