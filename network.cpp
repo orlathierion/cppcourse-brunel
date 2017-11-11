@@ -1,4 +1,14 @@
 #include "network.hpp"
+
+/**
+ * \class Network 
+ * this class represent the network of inhibitory and excitatory neuron as brunel described it
+ * it has 4 attribute: 
+ * netI : a vector with all the inhibitory neuron
+ * netE : a vector with all the excitatory neuron
+ * Ci : the number of inhibitory neurons 
+ * Ce : the number of excitatory neurons
+ **/
  
 Network::Network (unsigned int e, unsigned int i, double weight, double ratio) :  
 Ce (e),
@@ -19,14 +29,10 @@ Vthr(0.01)
 	
 Network::~Network () {
 	for (unsigned int i (0); i<Ce ; ++i ) { 
-		delete netE[i] ; 
-		}
+		delete netE[i] ; }
 	for ( unsigned int i (0); i<Ci ; ++i ) {
-		delete netI[i] ; 
-		}
-	}
+		delete netI[i] ; }}
 		
-
 void Network::createConnexion () {
 	static random_device rd ; 
 	static mt19937 gen (rd()) ; 
@@ -43,29 +49,18 @@ void Network::createConnexion () {
 		for (unsigned int j (0); j<0.1*Ci- 1 ; ++j ) {
 			netI[i]->addConnection(getInhibitory(disI(gen))); }}
 	}
-	
-
-	
+		
 Neuron* Network::getInhibitory (unsigned int i ) {
-	return netI[i] ; 
-	}
-
+	return netI[i] ; }
 
 Neuron* Network::getExcitatory (unsigned int e) {
-	return netE[e] ;
-	}
-
+	return netE[e] ;}
 
 void Network::refreshNetwork (int h) {
-	
 	for (unsigned int j(0); j<Ci - 1; ++j) {
-		netI[j]->RefreshPotential(h) ; 
-		}
+		netI[j]->RefreshPotential(h) ; }
 	for (unsigned int i(0); i<Ce -1 ; ++i) {
-		getExcitatory(i)->RefreshPotential(h) ;
-		  }
-		  
-	
+		getExcitatory(i)->RefreshPotential(h) ;}		  
 	++TimeStep;
 }
 
@@ -76,8 +71,5 @@ void Network::produceFigure () {
 		this->getExcitatory(1)->PrintSpike () ;}
 	for (unsigned int i(0) ; i<3 ; ++i) {
 		o<< "numero : " << i+Ce*0.1 << "  "  ;
-		this->getInhibitory(i)->PrintSpike () ; 
-		}
-	getInhibitory(1)->PrintRecord () ;
-	o.close () ; 
-}
+		this->getInhibitory(i)->PrintSpike () ; }
+	o.close () ; }
