@@ -40,7 +40,8 @@ class Network {
  * \param ratio : ratio Vext/Vthr
  **/
 	
-	Network (unsigned int e, unsigned int i, double weight, double ratio) ; 
+	Network (unsigned int e, unsigned int i, double weight, double ratio) ;
+	 
 	~Network () ; 
 	
 /**
@@ -69,7 +70,7 @@ class Network {
  * \brief this fonction will refresh all the neuron of the network simultaneously
  * \param h : the network time that will on which all neuron will be refresh 
  **/
-	void refreshNetwork (int h) ; 
+	void refreshNetwork () ; 
 	
 /**
  * \fn void produceFigure () 
@@ -84,3 +85,4 @@ class Network {
 
 
 #endif
+
