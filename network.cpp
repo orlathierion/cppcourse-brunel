@@ -1,3 +1,4 @@
+
 #include "network.hpp"
 
  
@@ -49,13 +50,19 @@ void Network::refreshNetwork () {
 		getInhibitory(j)->RefreshPotential(TimeStep) ; }
 	for (unsigned int i(0); i<Ce -1 ; ++i) {
 		getExcitatory(i)->RefreshPotential(TimeStep) ;}		  
-	++TimeStep;
-}
+	++TimeStep; }
 
 void Network::produceFigure () {
 	ofstream o ("spikes.gdf", ios::out ) ;
-	for (unsigned int i(0) ; i< Ce; ++i) {
-		this->getExcitatory(1)->PrintSpike ( i ) ;}
-	for (unsigned int i(0) ; i<Ci ; ++i) {
-		this->getInhibitory(i)->PrintSpike (i+Ce) ; }
+	for (unsigned int i(1) ; i< Ce*0.1 ; ++i) {
+		if (getExcitatory(i)->getNumberSpike () > 1) {
+			for (unsigned int j (1); j<getExcitatory(i)->getNumberSpike () ; ++j) {
+				o << getExcitatory(i)->getASpike(j) << " sec ; " << i << " neuron " << endl  ; }}
+			cout << "printing  : " << (i/(Ce*0.1+Ci*0.1))*100 << " % " << endl ; }
+	for (unsigned int i(1) ; i<Ci*0.1 ; ++i) {
+		if (getInhibitory(i)->getNumberSpike()> 1) {
+			for (unsigned int j (1); j<getInhibitory(i)->getNumberSpike () ; ++j) {
+				o << getInhibitory(i)->getASpike(j) << " sec ; " << i << " neuron " << endl  ; }} 
+		cout << "printing  : " << (i+Ce*0.1/(Ce*0.1+Ci*0.1))*100 << " % " << endl ;}
+		cout << "finishing ... " << endl ; 
 o.close () ; }
