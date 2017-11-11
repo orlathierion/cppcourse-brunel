@@ -1,4 +1,3 @@
-
 #include "network.hpp"
 
  
@@ -63,6 +62,6 @@ void Network::produceFigure () {
 		if (getInhibitory(i)->getNumberSpike()> 1) {
 			for (unsigned int j (1); j<getInhibitory(i)->getNumberSpike () ; ++j) {
 				o << getInhibitory(i)->getASpike(j) << " sec ; " << i << " neuron " << endl  ; }} 
-		cout << "printing  : " << (i+Ce*0.1/(Ce*0.1+Ci*0.1))*100 << " % " << endl ;}
+		cout << "printing  : " << ((i+Ce*0.1)/(Ce*0.1+Ci*0.1))*100 << " % " << endl ;}
 		cout << "finishing ... " << endl ; 
 o.close () ; }
