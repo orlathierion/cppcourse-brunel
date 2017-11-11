@@ -8,4 +8,4 @@ It will produce a Spikes.gdb file in your build that will contain the times at w
 
 One similution will take around 2 minutes for 600 ms, then 2  minutes (for all neurons) to print out the results, and finally the destructor will take an extra 2 minutes. In total the programme take 5 minutes. Over 600 ms, the program will be killed. 
 
-to plot the result, you will need to use a jupyter notebook (www.try.jupyter.org ). You will find the plot in the python_script.txt file. 
+to plot the result, you will need to use a jupyter notebook (www.try.jupyter.org ). 
