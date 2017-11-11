@@ -228,4 +228,4 @@ Neuron* Neuron::getConnected (int i) {
 	return connected[i] ; }
 	
 int Neuron::getNumberConnection () const {
-	return connected.size () ; }
+return connected.size () ; }
