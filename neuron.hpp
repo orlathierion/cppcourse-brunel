@@ -162,13 +162,6 @@ class Neuron {
 	vector<vector<double> > getRecord () const ; 
 	
 /*!
- * \fn void PrintRecord () 
- * \brief this fonction print all the potential for each time steps on the results document
- */	
-	
-	void PrintRecord () const ; 
-	
-/*!
  * \fn void PrintSpike () 
  * \brief this will fonction will print all the time at wich spikes occured on the results document
  */	
