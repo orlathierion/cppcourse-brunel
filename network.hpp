@@ -73,7 +73,7 @@ class Network {
 	
 /**
  * \fn void produceFigure () 
- * \brief this fonction will print the spiking time of 10% first neuron on the result sheet to allow us to produce figure 8 
+ * \brief this fonction will print the spiking time of 1% first neuron on the result sheet to allow us to produce figure 8 
  **/
 
 	
