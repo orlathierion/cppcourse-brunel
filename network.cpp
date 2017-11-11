@@ -1,14 +1,4 @@
 #include "network.hpp"
-
-/**
- * \class Network 
- * this class represent the network of inhibitory and excitatory neuron as brunel described it
- * it has 4 attribute: 
- * netI : a vector with all the inhibitory neuron
- * netE : a vector with all the excitatory neuron
- * Ci : the number of inhibitory neurons 
- * Ce : the number of excitatory neurons
- **/
  
 Network::Network (unsigned int e, unsigned int i, double weight, double ratio) :  
 Ce (e),
