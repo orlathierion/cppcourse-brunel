@@ -13,8 +13,8 @@ using namespace std ;
 
 /**
  * \class Network 
- * this class represent the network of inhibitory and excitatory neuron as brunel described it
- * it has 6 attribute: 
+ * this class represents the network of inhibitory and excitatory neuron as brunel described it.
+ * it has 6 attributes: 
  * netI : a vector with all the inhibitory neuron
  * netE : a vector with all the excitatory neuron
  * Ci : the number of inhibitory neurons 
@@ -47,34 +47,34 @@ class Network {
 	
 /**
  * \fn void createConnexion () 
- * \brief this fonction will create the different connexion for all the neuron
+ * \brief This fonction will create the different connexion for all the neuron.
  **/
 	void createConnexion () ;
 	
 /**
  * \fn Neuron* getInhibitory (unsigned int I)  
- * \param i: the number of the inhibitory neuron we want to access to  
- * \return it returns the Ith inhibitory neuron of the network
+ * \param i: the number of the inhibitory neuron we want to access to.  
+ * \return it returns the Ith inhibitory neuron of the network.
  **/
  
 	Neuron* getInhibitory (unsigned int I) ; 
 	
 /**
  * \fn Neuron* getExcitatory (unsigned int e)  
- * \param e : the numero of the excitatory neuron we want to access to  
- * \return a pointer on the neuron we want to access to 
+ * \param e : the numero of the excitatory neuron we want to access to.  
+ * \return a pointer on the neuron we want to access to. 
  **/
 	Neuron* getExcitatory (unsigned int E ) ; 
 	 
 /**
  * \fn void refreshNetwork ( ) 
- * \brief this fonction will refresh all the neuron of the network simultaneously
+ * \brief This fonction will refresh all the neuron of the network simultaneously
  **/
 	void refreshNetwork () ; 
 	
 /**
  * \fn void produceFigure () 
- * \brief this fonction will print the spiking time of 1% first neuron on the result sheet to allow us to produce figure 8 
+ * \brief This fonction will print the spiking time of 1% first neuron on the result sheet to allow us to produce figure 8. 
  **/
 
 	
