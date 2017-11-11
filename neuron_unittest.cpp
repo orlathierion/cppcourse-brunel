@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include "neuron.hpp" 
 #include "gtest.h"
