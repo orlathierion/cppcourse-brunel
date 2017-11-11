@@ -47,7 +47,8 @@ class Neuron {
 	 * \param c : the number of excitatory neuron 
 	 */
 	
-	Neuron (bool e, double v, double g, int c) ;  
+	Neuron (bool e, double v, double g, int c) ; 
+	 
 	~Neuron ();  
 
  /*!
@@ -166,12 +167,13 @@ class Neuron {
  * \brief this will fonction will print all the time at wich spikes occured on the results document
  */	
 	
-	void PrintSpike () const ;
+	void PrintSpike (int i) const ;
 	
 /*!
  * \fn bool isRefractory ()
  * \brief this fonction allows us to know if the neuron is in a refractory period 
- * \return {it will be true if the membrane is in its refractory periods }
+ * \param i : itcorrespond to the number of the neuron in the network
+ *\return {it will be true if the membrane is in its refractory periods }
  */	
 	
 	bool isRefractory ( ) ; 
@@ -245,4 +247,3 @@ class Neuron {
 	};
 
 #endif 
-
