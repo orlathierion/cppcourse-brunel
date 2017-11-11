@@ -108,11 +108,9 @@ void Neuron::RefreshPotential (double h ) {
 			static random_device rd ; 
 			static mt19937 gen(rd()) ;
 			static poisson_distribution<> d(Ce*Vext) ; 
-			Potential = exp ( -h * step / tau )*getPotential (h-1) + getI()*(MembraneResistance)*(1-exp(-h/tau)) ;
-		Potential += ReceiveSpike (h) ;
-		Potential += d(gen) ;  }}
+			Potential = exp ( -h * step / tau )*getPotential (h-1) + getI()*(MembraneResistance)*(1-exp(-h/tau)) + ReceiveSpike (h) + d(gen) ;  }}
 	updateRecord () ; 
-	time += 1 ;   }
+	tsetTime (h+1);   }
 	
  
  bool Neuron::IsExcitatory(){
@@ -136,21 +134,6 @@ bool Neuron::Is_spike (unsigned int h ){
 vector<vector<double> > Neuron::getRecord () const {
 	return Record ; 
 	} 
-	
-
-	
-void Neuron::PrintRecord () const {
-	ofstream o ("Spikes.gdb", ios::out) ; 
-	vector<vector<double> > v ; 
-	v = getRecord () ; 
-	for (unsigned int i(1); i<getRecord().size () ; ++ i ) {
-		if (v[i][1]>getFiringThreshold ()){
-		o << v[i][1] << " ; " ; }
-		}
-	o << endl ;
-	}
-
-
 
 void Neuron::PrintSpike () const {
 	ofstream o ("Spikes.gdb", ios::out) ; 
