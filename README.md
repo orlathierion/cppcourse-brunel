@@ -6,6 +6,6 @@ To run it you will need to use cmake. The programme will ask you to enter the di
 
 It will produce a Spikes.gdb file in your build that will contain the times at wich the spiking occured, then, using jupytier you will be abble to produce figure that will show you when the neuron spikes. 
 
-One similution will take around 1 minutes for 600 ms, and the 15 minutes to print out the results. Over 600 ms, the program will be killed. 
+One similution will take around 2 minutes for 600 ms, then 2  minutes (for all neurons) to print out the results, and finally the destructor will take an extra 2 minutes. In total the programme take 5 minutes. Over 600 ms, the program will be killed. 
 
 The results you will get cannot be put in a graphic by jupyter (error : invalid index to scalar variable )
