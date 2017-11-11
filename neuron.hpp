@@ -1,3 +1,4 @@
+
 #ifndef NEURON_H
 #define NEURON_H
 
@@ -163,11 +164,12 @@ class Neuron {
 	vector<vector<double> > getRecord () const ; 
 	
 /*!
- * \fn void PrintSpike () 
- * \brief this will fonction will print all the time at wich spikes occured on the results document
- */	
-	
-	void PrintSpike (int i) const ;
+ * \fn int getASpike (unsigned int i) const
+ * \param i : the numero of the spike you want to access
+ * \return the time at wich this spike occured 
+ */
+ 
+ int getASpike (unsigned int i ) const ; 
 	
 /*!
  * \fn bool isRefractory ()
