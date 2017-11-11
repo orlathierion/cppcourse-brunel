@@ -1,3 +1,4 @@
+
 #ifndef NETWORK
 #define NETWORK
 
@@ -85,4 +86,3 @@ class Network {
 
 
 #endif
-
