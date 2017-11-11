@@ -72,7 +72,8 @@ void Neuron::RefreshPotential (double h ) {
 	if (isRefractory() ) {Potential = 10.0 ;  }
 	if (not isRefractory ()) {
 		if (Is_spike(h) ) {
-			Potential = 0 ; } 
+			Potential = 0 ; 
+			} 
 		else {	
 			static random_device rd ; 
 			static mt19937 gen(rd()) ;
