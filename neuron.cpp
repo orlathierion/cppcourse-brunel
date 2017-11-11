@@ -129,7 +129,7 @@ double Neuron::ReceiveSpike (unsigned int h) {
 
 
 double Neuron::getNumberSpike () const {
-	return spikes.size () ; 
+	return spikes.size () -1 ; 
 }
 
 
