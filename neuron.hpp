@@ -1,4 +1,3 @@
-
 #ifndef NEURON_H
 #define NEURON_H
 
@@ -53,7 +52,8 @@ class Neuron {
 	~Neuron ();  
 
  /*!
-  * \fn double getPotential () const
+  * \fn double getPotential (unsigned int h) const
+  * \param h : the time qt wich ywe want the potential
   * \return curent value of the membrqne potential */
   
 	double getPotential (unsigned int h) const ;
@@ -109,8 +109,8 @@ class Neuron {
 /*!
  * \fn void setIntervalle (double debut, double fin)
  * \brief this fonction will allow us to set the begining and ending time of an external imput
- * \param debut {the begining of the imput}
- * \param fin {the end of the imput}
+ * \param debut :the begining of the imput
+ * \param fin : the end of the imput
  */ 
 	
 	void setIntervalle (double debut, double fin) ;
@@ -118,7 +118,7 @@ class Neuron {
 	/*! 
  * \fn void setTime(double t )  
  * \brief it allows us to change the inner clock of the cell 
- * \param <t> {new time}
+ * \param t : new time
  */
 	
 	void setTime (double t) ;
@@ -134,7 +134,7 @@ class Neuron {
 /*!
  * \fn void addConnection (Neuron* n )  
  * \brief addConnection create a new connection with a neuron 
- * \param <n> {it is a pointer on the neuron we want to connect to }
+ * \param n : it is a pointer on the neuron we want to connect to 
  */	
 	
 	void addConnection (Neuron* n ) ;
@@ -142,7 +142,7 @@ class Neuron {
 /*!
  * \fn void RefreshPotential (double h )  
  *  \brief RefreshPotential refresh the membrane potential at time h. 
- * \param <h> {time in the local clock}
+ * \param h :time in the local clock
  */	
 	
 	void RefreshPotential (double h) ;
@@ -150,6 +150,7 @@ class Neuron {
 /*!
  * \fn bool Is_spike (unsigned int h )
  *  \brief Is_Spike permet de savoir si un spike est crée ou non 
+ * \param h .: the time qt wich we want to know if there is a spike
  * \return it will retrun true if a spike is created
  */	
 	
@@ -158,7 +159,7 @@ class Neuron {
 /*!
 	 * \fn bool getRecord()
 	 * \brief this fonction will give all the membrane potential at each steps
-	 * \return {it will return a table with the time a the corresponding potential membrane}
+	 * \return it will return a table with the time a the corresponding potential membrane
 	 */ 	
 	
 	vector<vector<double> > getRecord () const ; 
@@ -175,7 +176,7 @@ class Neuron {
  * \fn bool isRefractory ()
  * \brief this fonction allows us to know if the neuron is in a refractory period 
  * \param i : itcorrespond to the number of the neuron in the network
- *\return {it will be true if the membrane is in its refractory periods }
+ *\return it will be true if the membrane is in its refractory periods 
  */	
 	
 	bool isRefractory ( ) ; 
@@ -183,7 +184,7 @@ class Neuron {
 /*!
  * \fn bool SendSpikes ()
  * \brief it allow us to know if the neuron is doing a spike at the curent time 
- * \return {it will retruns the value of the sended spikes}
+ * \return it will retruns the value of the sended spikes
  */	
 	
 	double SendSpikes (unsigned int h ) ; 
@@ -191,7 +192,7 @@ class Neuron {
 /**
  * \fn double ReceiveSpike (unsigned int h )  
  * \brief this fonction will collect all the spikes that the connected neuron have sended 
- * \param <h> the time at which we look if the spikes were send
+ * \param h : the time at which we look if the spikes were send
  **/ 	
 	
 	double ReceiveSpike (unsigned int h ) ; 
