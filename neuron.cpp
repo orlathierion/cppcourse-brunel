@@ -21,12 +21,9 @@ Vext (v),
 Ce (c)
 {	spikes.push_back (-2) ; 
 	 for (unsigned int i (0) ; i<Buffer.size() ; ++i ) {
-		 Buffer [i] = 0 ; 
-	} 
+		 Buffer [i] = 0 ; } 
 	if (not excitatory) {
-		j=-g*j ; 
-		}
-	}
+		j=-g*j ; }}
 		 
 Neuron::~Neuron () {}
 
@@ -96,17 +93,9 @@ bool Neuron::Is_spike (unsigned int h ){
 vector<vector<double> > Neuron::getRecord () const {
 	return Record ; } 
 	
-void Neuron::PrintSpike (int i) const {
-	ofstream o ("spikes.gdf", ios::out) ; 
-	if (o.fail ()) {
-		cout << "the result file couldn't be open " << endl ; }
-	if (spikes.size() > 1) {
-		for (unsigned int j (1); i<spikes.size() ; ++i) {
-			o << spikes [j] << " sec ; " << i << " neuron " << endl  ; }}
-	else {
-		o << "there was no spike." ; }
-	o<< endl ; 
-	o.close () ; }
+int Neuron::getASpike (unsigned int i) const {
+	return spikes[i] ; 
+	}
 	
 bool Neuron::isRefractory () {  
 	if (spikes.size () > 1) {
@@ -128,7 +117,7 @@ double Neuron::ReceiveSpike (unsigned int h) {
 	double SumSpikes (0.0); 
 	BufferCurseur = BufferCurseur % Buffer.size() ; 
 	if (connected.size () >= 1 ) {
-	for (unsigned int i (1) ; i<connected.size () -1 ; ++i ) { 
+	for (unsigned int i (1) ; i<getNumberConnection() -1 ; ++i ) { 
 		if (Is_spike(h) ) {
 			SumSpikes += j ; }
 	Buffer [(BufferCurseur+ bufferDelay ) % Buffer.size()] = SumSpikes ; }}
@@ -143,8 +132,7 @@ double Neuron::getNumberSpike () const {
 
 
 void Neuron::updateRecord () {
-	vector <double> n ({time, Potential}) ; 
-	Record.push_back (n) ;   
+	Record.push_back ({time, Potential}) ;   
 	}
 
 Neuron* Neuron::getConnected (int i) { 
