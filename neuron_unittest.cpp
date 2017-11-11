@@ -5,44 +5,6 @@
 
 using namespace std ; 
 
- /*TEST (NeuronTest, PotentialZEROTest) {
-	Neuron E (true); 
-	Neuron I (false); 
-	E.setI(0) ; 
-	I.setI (0) ; 
-	E.setIntervalle (0, 20) ; 
-	I.setIntervalle (0, 20) ; 
-	for (unsigned int j (0) ; j<50 ; ++j) {
-		E.setTime (1) ; 
-		I.setTime (1) ;
-		E.RefreshPotential (1) ; 
-		I.RefreshPotential (1) ; 
-	}
-	EXPECT_EQ(E.getNumberSpike(), 1) ;
-	EXPECT_EQ(I.getNumberSpike(), 1) ; 
-	EXPECT_NEAR(E.getPotential(),2, 0.0 ) ; 
-	EXPECT_NEAR(I.getPotential(),2,  0.0 ) ;
-}
-
-TEST(NeuronTest, PotentialONETest) {
-	Neuron E (true) ;
-	Neuron I (false) ; 
-	E.setI(1.00) ; 
-	I.setI (1.00) ; 
-	E.setIntervalle (0, 20) ; 
-	I.setIntervalle (0, 20) ; 
-	for (unsigned int j (0) ; j<50 ; ++j) {
-		E.setTime (j) ; 
-		I.setTime (j) ;
-		E.RefreshPotential (j) ; 
-		I.RefreshPotential (j) ; 
-	}
-	EXPECT_EQ(E.getNumberSpike(), 1) ;
-	EXPECT_EQ(I.getNumberSpike(), 1) ; 
-	EXPECT_DOUBLE_EQ(E.getPotential(), 20.0 ) ; 
-	EXPECT_DOUBLE_EQ(I.getPotential(), 20.0 ) ;
-}*/
-
 TEST(NeuronTest, SpikingTest) {
 	Neuron E (true); 
 	Neuron I (false);  
