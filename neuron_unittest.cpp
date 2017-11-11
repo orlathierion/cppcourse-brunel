@@ -7,11 +7,11 @@ using namespace std ;
 TEST (NeuronTest, SpikingTest) {
 	Neuron E (true, 1, 1, 1); 
 	Neuron I (false, 1, 1, 1);  
-	E.setI(1.01) ; 
+	E.setI(1.2) ; 
 	I.setI (1.01) ; 
 	E.setIntervalle (0,20) ; 
 	I.setIntervalle (0,20) ; 
-	for (unsigned int j (0) ; j<50 ; ++j) {
+	for (unsigned int j (0) ; j<500 ; ++j) {
 		E.setTime (j) ; 
 		I.setTime (j) ;
 		E.RefreshPotential (j) ; 
@@ -56,7 +56,7 @@ TEST (NeuronTest, sendSpikeTest) {
 		++time ; 
 		n.RefreshPotential (time); 
 		}while (not(n.Is_spike(time))) ; 
-	EXPECT_NEAR (n.SendSpikes (time), 0.1, 0.01) ;
+	EXPECT_GT (n.SendSpikes (time), 0) ;
 	}
 	
 TEST (NeuronTest, ReceiveSpikeTest){
