@@ -18,6 +18,7 @@ using namespace std ;
 
 class Neuron {
 	private : 
+	int numero ; 
 	double Potential ;
 	vector<double> spikes ;
 	double tau ; 
