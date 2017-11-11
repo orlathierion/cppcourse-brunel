@@ -1,4 +1,3 @@
-
 #ifndef NETWORK
 #define NETWORK
 
@@ -67,9 +66,8 @@ class Network {
 	Neuron* getExcitatory (unsigned int E ) ; 
 	 
 /**
- * \fn void refreshNetwork (int h ) 
+ * \fn void refreshNetwork ( ) 
  * \brief this fonction will refresh all the neuron of the network simultaneously
- * \param h : the network time that will on which all neuron will be refresh 
  **/
 	void refreshNetwork () ; 
 	
