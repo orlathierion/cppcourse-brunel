@@ -60,12 +60,12 @@ void Network::produceFigure () {
 	per = per/100 ; 
 	ofstream o ("spikes.gdf", ios::out ) ;
 	for (unsigned int i(1) ; i< Ce*per ; ++i) {
-		if (getExcitatory(i)->getNumberSpike () > 1) {
+		if (getExcitatory(i)->getNumberSpike () > 0) {
 			for (unsigned int j (1); j<getExcitatory(i)->getNumberSpike () ; ++j) {
 				o << i << "n" << getExcitatory(i)->getASpike(j) << "s" << endl  ; }}
 			cout << "printing  : " << (i/(Ce*per+Ci*per))*100 << " % " << endl ; }
 	for (unsigned int i(1) ; i<Ci*per ; ++i) {
-		if (getInhibitory(i)->getNumberSpike()> 1) {
+		if (getInhibitory(i)->getNumberSpike()> 0) {
 			for (unsigned int j (1); j<getInhibitory(i)->getNumberSpike () ; ++j) {
 				o <<  getInhibitory(i)->getASpike(j) << "\s" << i+ Ce*per << "\n" <<  endl  ; }} 
 		cout << "printing  : " << ((i+Ce*per)/(Ce*per+Ci*per))*100 << " % " << endl ;}
